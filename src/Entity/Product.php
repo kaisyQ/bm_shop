@@ -35,9 +35,9 @@ class Product
     private ?bool $bestseller = null;
 
     #[ORM\ManyToOne]
-    private ?Category $categoryId = null;
+    private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, cascade: ["persist", "remove"])]
     private Collection $images;
 
     #[ORM\Column]
@@ -46,9 +46,23 @@ class Product
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column]
+    private ?int $count = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue () {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    #[ORM\PrePersist]
+    public function setUpdatedAtValue ()  {
+        $this->updatedAt = new \DateTimeImmutable();     
     }
 
     public function getId(): ?int
@@ -128,14 +142,14 @@ class Product
         return $this;
     }
 
-    public function getCategoryId(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
-    public function setCategoryId(?Category $categoryId): static
+    public function setCategory(?Category $category): static
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
         return $this;
     }
@@ -147,7 +161,10 @@ class Product
     {
         return $this->images;
     }
-
+    public function setImages (Collection $images) : self {
+        $this->images = $images;
+        return $this;
+    }
     public function addImage(Image $image): static
     {
         if (!$this->images->contains($image)) {
@@ -157,7 +174,6 @@ class Product
 
         return $this;
     }
-
     public function removeImage(Image $image): static
     {
         if ($this->images->removeElement($image)) {
@@ -190,6 +206,18 @@ class Product
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCount(): ?int
+    {
+        return $this->count;
+    }
+
+    public function setCount(int $count): static
+    {
+        $this->count = $count;
 
         return $this;
     }
