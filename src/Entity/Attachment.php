@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Entity\Product;
 use Doctrine\ORM\Mapping\PreRemove;
+use App\Repository\AttachmentRepository;
 
 #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
 #[Vich\Uploadable] 
