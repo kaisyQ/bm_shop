@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -37,9 +38,6 @@ class Product
     #[ORM\ManyToOne]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Image::class, cascade: ["persist", "remove"])]
-    private Collection $images;
-
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -49,20 +47,27 @@ class Product
     #[ORM\Column]
     private ?int $count = null;
 
+    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy:"product", cascade: ["persist", "remove"])]
+    private Collection $attachments;
+
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     #[ORM\PrePersist]
-    public function setCreatedAtValue () {
+    public function setCreatedAtValue()
+    {
         $this->createdAt = new \DateTimeImmutable();
     }
 
     #[ORM\PreUpdate]
     #[ORM\PrePersist]
-    public function setUpdatedAtValue ()  {
-        $this->updatedAt = new \DateTimeImmutable();     
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -154,38 +159,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Image>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-    public function setImages (Collection $images) : self {
-        $this->images = $images;
-        return $this;
-    }
-    public function addImage(Image $image): static
-    {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setProduct($this);
-        }
-
-        return $this;
-    }
-    public function removeImage(Image $image): static
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getProduct() === $this) {
-                $image->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -218,6 +191,37 @@ class Product
     public function setCount(int $count): static
     {
         $this->count = $count;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Attachment[]
+     */
+    public function getAttachments(): Collection
+    {
+        return $this->attachments;
+    }
+
+    public function addAttachment(Attachment $attachment): self
+    {
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments[] = $attachment;
+            $attachment->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttachment(Attachment $attachment): self
+    {
+        if ($this->attachments->contains($attachment)) {
+            $this->attachments->removeElement($attachment);
+            // set the owning side to null (unless already changed)
+            if ($attachment->getProduct() === $this) {
+                $attachment->setProduct(null);
+            }
+        }
 
         return $this;
     }
