@@ -23,8 +23,6 @@ class CommentCrudController extends AbstractCrudController
 
         yield TextField::new('username');
         
-        yield TextField::new('title');
-        
         yield TextareaField::new('text');
 
         yield IntegerField::new('stars');
