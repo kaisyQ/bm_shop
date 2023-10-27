@@ -24,6 +24,14 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
 
+    /**
+	 * @param  $id 
+	 * @return self
+	 */
+	public function setId(?int $id): self {
+		$this->id = $id;
+		return $this;
+	}
     public function getId(): ?int
     {
         return $this->id;
@@ -78,4 +86,6 @@ class Category
     public function __toString(): string {
         return $this->name;
     }
+
+
 }

@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Dto\CommentListItem;
+use App\Dto\CreateCommentRequest;
+use App\Dto\UpdateCommentRequest;
 use App\Service\CommentService;
 use CommentList;
-use CreateCommentRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,6 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use UpdateCommentRequest;
 
 #[Route(name: "comments", path: "api/v1/comments")]
 class CommentController extends AbstractController

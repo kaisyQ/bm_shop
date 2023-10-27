@@ -76,7 +76,6 @@ class ProductCrudController extends AbstractCrudController
             ->onlyOnForms()
             ->setEntryType(AttachmentType::class);
        
-
         yield DateField::new('createdAt');
 
         yield DateField::new('updatedAt');

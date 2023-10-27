@@ -10,17 +10,20 @@ use Doctrine\ORM\Events;
 
 #[AsEntityListener(event: Events::prePersist, entity: Category::class)]
 #[AsEntityListener(event: Events::preUpdate, entity: Category::class)]
-class CategoryEntityListener {
+class CategoryEntityListener
+{
 
     public function __construct(
         private SluggerInterface $slugger,
     ) {}
 
-    public function prePersist (Category $category, LifecycleEventArgs $lifecycleEventArgs) {
+    public function prePersist(Category $category, LifecycleEventArgs $lifecycleEventArgs)
+    {
         $category->computeSlug($this->slugger);
     }
 
-    public function preUpdate(Category $category , LifecycleEventArgs $lifecycleEventArgs) {
+    public function preUpdate(Category $category, LifecycleEventArgs $lifecycleEventArgs)
+    {
         $category->computeSlug($this->slugger);
     }
 }

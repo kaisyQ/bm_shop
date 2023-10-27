@@ -2,13 +2,13 @@
 
 namespace App\Service;
 
+use App\Dto\CommentList;
 use App\Dto\CommentListItem;
+use App\Dto\CreateCommentRequest;
+use App\Dto\UpdateCommentRequest;
 use App\Entity\Comment;
 use App\Repository\CommentRepository;
-use CommentList;
-use CreateCommentRequest;
 use Doctrine\ORM\EntityManagerInterface;
-use UpdateCommentRequest;
 
 class CommentService
 {

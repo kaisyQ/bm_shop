@@ -1,5 +1,7 @@
 <?php
 
+
+namespace App\Dto;
 class CreateCommentRequest
 {
 

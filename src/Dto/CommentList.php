@@ -1,5 +1,9 @@
 <?php
 
+
+namespace App\Dto;
+
+
 use App\Dto\CommentListItem;
 
 class CommentList

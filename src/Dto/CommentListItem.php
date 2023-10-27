@@ -3,7 +3,6 @@
 namespace App\Dto;
 
 use DateTimeImmutable;
-use Symfony\Component\Validator\Constraints\Date;
 
 class CommentListItem {
     private int $id;
