@@ -32,6 +32,17 @@ class Comment
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    public function __construct() {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }     
+
+
+    #[ORM\PreUpdate]
+    public function preUpdateDate () {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

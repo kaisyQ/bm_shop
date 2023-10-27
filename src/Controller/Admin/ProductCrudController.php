@@ -7,10 +7,14 @@ use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\AttachmentType;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -18,12 +22,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ProductCrudController extends AbstractCrudController
 {
-    private $entityManager;
     public static function getEntityFqcn(): string
     {
         return Product::class;
     }
 
+    public function configureActions(Actions $actions) : Actions {
+        return $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+        ;
+    }
     public function updateEntity(EntityManagerInterface $em, $entity): void
     {
 
@@ -50,7 +58,8 @@ class ProductCrudController extends AbstractCrudController
 
         yield TextField::new('name');
         
-        yield TextareaField::new('description');
+        yield TextareaField::new('description')
+            ->onlyOnDetail();
         
         yield IntegerField::new('price');
         
@@ -60,23 +69,18 @@ class ProductCrudController extends AbstractCrudController
 
         yield BooleanField::new('bestseller');
         
-        yield TextareaField::new('delivery');
+        yield TextareaField::new('delivery')
+            ->onlyOnDetail();
         
         yield CollectionField::new('attachments')
             ->onlyOnForms()
             ->setEntryType(AttachmentType::class);
        
-        //yield ImageField::new('imageFile')->setFormType(VichFileType::class)->setLabel("Images");
-        
 
+        yield DateField::new('createdAt');
 
-        yield IntegerField::new('price');
-        
-        yield IntegerField::new('discountPrice');
-
-        yield DateTimeField::new('createdAt');
-
-        yield DateTimeField::new('updatedAt');
+        yield DateField::new('updatedAt');
     }
     
+
 }

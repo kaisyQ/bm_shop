@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -67,4 +68,14 @@ class Category
 		$this->products = $products;
 		return $this;
 	}
+
+    public function computeSlug (SluggerInterface $sluggerInterface) {
+        if (!$this->slug || '-' === $this->slug) {
+            $this->slug = $sluggerInterface->slug($this->name)->lower();
+        }
+    }
+
+    public function __toString(): string {
+        return $this->name;
+    }
 }
