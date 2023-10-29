@@ -53,7 +53,7 @@ class CommentService
         );
     }
 
-    public function deleteCommentById($id)
+    public function deleteCommentById(int $id)
     {
         $comment = $this->commentRepository->find($id);
 
