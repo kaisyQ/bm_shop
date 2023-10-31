@@ -26,7 +26,7 @@ class CommentController extends AbstractController
     #[Route(path: "/", name: "comment_index", methods: ["GET"])]
     #[OA\Response(
         response: 200,
-        description: 'Returns all comments',
+        description: 'Return all comments',
         content: new OA\JsonContent(
             type: 'array',
             items: new OA\Items(ref: new Model(type: CommentList::class))
@@ -55,7 +55,7 @@ class CommentController extends AbstractController
     #[Route(path: "/create", name: "comment_store", methods: ["POST"])]
     #[OA\Response(
         response: 200,
-        description: 'Returns created comment',
+        description: 'Return created comment',
         content: new OA\JsonContent(
             ref: new Model(type: CommentListItem::class)
         )
@@ -74,7 +74,7 @@ class CommentController extends AbstractController
     #[Route(path: "/update/{id}", name: "comment_update", methods: ["PUT"])]
     #[OA\Response(
         response: 200,
-        description: 'Returns updated comment',
+        description: 'Return updated comment',
         content: new OA\JsonContent(
             ref: new Model(type: CommentListItem::class)
         )
@@ -93,7 +93,7 @@ class CommentController extends AbstractController
     #[Route(path: "/delete/{id}", name: "comment_destroy", methods: ['DELETE'])]
     #[OA\Response(
         response: 200,
-        description: 'Returns deleted comment identificator',
+        description: 'Return deleted comment identificator',
         content: new OA\JsonContent(
             type: 'object',
             properties: [
