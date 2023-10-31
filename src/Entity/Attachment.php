@@ -8,6 +8,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Entity\Product;
 use Doctrine\ORM\Mapping\PreRemove;
 use App\Repository\AttachmentRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
 #[Vich\Uploadable] 
@@ -20,6 +21,7 @@ class Attachment
     private $id;
 
     #[ORM\Column(type: "string", length: 255)]
+    #[Groups("product")]
     private ?string $image = null;
 
     #[Vich\UploadableField(mapping: "attachments", fileNameProperty: "image")]
@@ -32,6 +34,7 @@ class Attachment
     private $updatedAt;
 
     #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: "attachments")]
+    #[Groups(["attachment"])]
     private $product;
 
     public function __construct()

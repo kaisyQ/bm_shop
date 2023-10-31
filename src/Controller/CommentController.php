@@ -6,7 +6,7 @@ use App\Dto\CommentListItem;
 use App\Dto\CreateCommentRequest;
 use App\Dto\UpdateCommentRequest;
 use App\Service\CommentService;
-use CommentList;
+use App\Dto\CommentList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

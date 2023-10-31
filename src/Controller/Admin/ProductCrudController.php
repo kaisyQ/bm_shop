@@ -59,7 +59,7 @@ class ProductCrudController extends AbstractCrudController
         yield TextField::new('name');
         
         yield TextareaField::new('description')
-            ->onlyOnDetail();
+            ->onlyOnForms();
         
         yield IntegerField::new('price');
         
@@ -70,7 +70,7 @@ class ProductCrudController extends AbstractCrudController
         yield BooleanField::new('bestseller');
         
         yield TextareaField::new('delivery')
-            ->onlyOnDetail();
+            ->onlyOnForms();
         
         yield CollectionField::new('attachments')
             ->onlyOnForms()

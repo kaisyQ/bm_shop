@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -15,39 +16,50 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("product")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("product")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups("product")]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups("product")]
     private ?string $delivery = null;
 
     #[ORM\Column]
+    #[Groups("product")]
     private ?int $price = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("product")]
     private ?int $discountPrice = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("product")]
     private ?bool $bestseller = null;
 
     #[ORM\ManyToOne]
+    #[Groups("product")]
     private ?Category $category = null;
 
     #[ORM\Column]
+    #[Groups("product")]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
+    #[Groups("product")]
     private ?int $count = null;
 
     #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy:"product", cascade: ["persist", "remove"])]
+    #[Groups("product")]
     private Collection $attachments;
 
     public function __construct()
