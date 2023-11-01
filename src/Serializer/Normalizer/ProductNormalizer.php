@@ -50,7 +50,7 @@ class ProductNormalizer implements DenormalizerInterface
         return $product;
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
     {
         return $data instanceof ProductListItem;
     }

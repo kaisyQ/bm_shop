@@ -32,16 +32,17 @@ class ProductController extends AbstractController
     {
         return $this->json($this->productService->getProducts());
     }
-    public function store()
+
+    #[Route(path: '/{id}', name: 'show', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Return product',
+        content: new OA\JsonContent(
+            ref: new Model(type: ProductListItem::class)
+        )
+    )]
+    public function show(int $id)
     {
-    }
-    public function show($id)
-    {
-    }
-    public function update($id)
-    {
-    }
-    public function destroy($id)
-    {
+        return $this->json($this->productService->getProduct($id));
     }
 }

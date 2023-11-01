@@ -31,4 +31,14 @@ class ProductService
             )
         );
     }
+
+    public function getProduct(int $id): ProductListItem
+    {
+
+        $product = $this->productRepository->find($id);
+
+        $serializeProduct = $this->serializer->serialize($product, 'json', ['groups' => ['product']]);
+
+        return $this->productNormalizer->denormalize(json_decode($serializeProduct), ProductListItem::class);
+    }
 }
