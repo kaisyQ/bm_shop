@@ -45,4 +45,5 @@ class ProductController extends AbstractController
     {
         return $this->json($this->productService->getProduct($id));
     }
+    
 }
