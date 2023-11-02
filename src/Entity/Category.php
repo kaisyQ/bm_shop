@@ -14,18 +14,20 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['category'])]
 
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("product")]
+    #[Groups(["product", 'category'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['category'])]
     private ?string $slug = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
-    #[Groups(['category'])]
+    #[Groups(['temp'])]
     private Collection $products;
 
     /**

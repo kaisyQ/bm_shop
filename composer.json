@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.16",
         "easycorp/easyadmin-bundle": "^4",
         "nelmio/api-doc-bundle": "^4.12",
+        "nelmio/cors-bundle": "^2.3",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2",
