@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Dto\ProductListResponse;
 use App\Repository\ProductRepository;
 use App\Dto\ProductListItem;
+use App\Repository\CategoryRepository;
 use App\Serializer\Normalizer\ProductNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -13,15 +14,21 @@ class ProductService
 
     public function __construct(
         private ProductRepository $productRepository,
+        private CategoryRepository $categoryRepository,
         private SerializerInterface $serializer,
         private ProductNormalizer $productNormalizer,
     ) {
     }
-    public function getProducts(): ProductListResponse
+    public function getProducts(?string $categorySlug): ProductListResponse
     {
-
-        $products = $this->productRepository->findAll();
-
+        $products = [];
+        
+        if ($categorySlug) {
+            $category = $this->categoryRepository->findOneBy(['slug' => $categorySlug]);
+            $products = $this->productRepository->findBy(['category' => $category]);
+        } else {
+            $products = $this->productRepository->findAll();
+        }
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
 
         return new ProductListResponse(

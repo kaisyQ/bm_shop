@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
-
+use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 
 #[Route(path: "/api/v1/products", name: "product_controller")]
 class ProductController extends AbstractController
@@ -26,11 +26,11 @@ class ProductController extends AbstractController
         content: new OA\JsonContent(
             type: 'array',
             items: new OA\Items(ref: new Model(type: ProductListResponse::class))
-        )
+        ),
     )]
-    public function index()
+    public function index(#[MapQueryParameter] ?string $category)
     {
-        return $this->json($this->productService->getProducts());
+        return $this->json($this->productService->getProducts($category));
     }
 
     #[Route(path: '/{slug}', name: 'show', methods: ['GET'])]

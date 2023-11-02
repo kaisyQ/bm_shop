@@ -33,8 +33,14 @@ class MailerController extends AbstractController
     }
 
     #[Route(path: "/sell_couch", name: "sell_couch", methods: ["POST"])]
+    #[OA\RequestBody(
+        content: new OA\JsonContent(
+            ref: new Model(type: SellCouchRequest::class)
+        )
+    )]
     public function sell(#[MapRequestPayload] SellCouchRequest $request)
     {
-
+        $this->mailerService->sendSellCouchMessage($request);
+        return $this->json(['send' => true]);
     }
 }
