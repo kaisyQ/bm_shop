@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Constants\Constants;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -84,6 +84,7 @@ class Product
         $this->attachments = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->delivery = Constants::DELIVERY_MESSAGE;
     }
 
     #[ORM\PreUpdate]
