@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -58,9 +59,13 @@ class Product
     #[Groups("product")]
     private ?int $count = null;
 
-    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy:"product", cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: "product", cascade: ["persist", "remove"])]
     #[Groups("product")]
     private Collection $attachments;
+
+    #[ORM\Column(length: 255)]
+    #[Groups("product")]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -69,14 +74,7 @@ class Product
         $this->updatedAt = new \DateTimeImmutable();
     }
 
-    #[ORM\PrePersist]
-    public function setCreatedAtValue()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
-
     #[ORM\PreUpdate]
-    #[ORM\PrePersist]
     public function setUpdatedAtValue()
     {
         $this->updatedAt = new \DateTimeImmutable();
@@ -236,5 +234,24 @@ class Product
         }
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function computeSlug(SluggerInterface $sluggerInterface)
+    {
+        if (!$this->slug || '-' === $this->slug) {
+            $this->slug = $sluggerInterface->slug($this->name)->lower();
+        }
     }
 }

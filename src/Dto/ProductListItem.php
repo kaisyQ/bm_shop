@@ -15,11 +15,11 @@ class ProductListItem
     private int $price;
     private ?int $discountPrice;
     private int $count;
-
     private bool $bestseller;
     private DateTimeImmutable $createdAt;
     private array $images;
     private ?string $category;
+    private string $slug;
     public function getId(): int
     {
         return $this->id;
@@ -144,6 +144,17 @@ class ProductListItem
     public function setBestseller(bool $bestseller): self
     {
         $this->bestseller = $bestseller;
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 }

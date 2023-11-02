@@ -8,23 +8,27 @@ class CategoryListResponse
     /**
      * @var CategoryListItem[]
      */
-    private array $categories;
+    private array $items;
 
     /**
-     * @param CategoryListItem[] $categories
+     * @param CategoryListItem[] $items
      */
-    public function __construct(array $categories)
+    public function __construct(array $items)
     {
-        $this->categories = $categories;
+        $this->items = $items;
     }
 
-    public function getCategories(): array
+    public function getItems(): array
     {
-        return $this->categories;
+        return $this->items;
     }
-    public function setCategories(array $categories): self
+
+    /**
+     * @param CategoryListItem[] $items
+     */
+    public function setItems(array $items): self
     {
-        $this->categories = $categories;
+        $this->items = $items;
         return $this;
     }
 }

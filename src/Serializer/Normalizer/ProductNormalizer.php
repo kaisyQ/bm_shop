@@ -44,6 +44,9 @@ class ProductNormalizer implements DenormalizerInterface
         if (isset($data->category))
             $product->setCategory($data->category->name);
 
+        if (isset($data->slug))
+            $product->setSlug($data->slug);
+
         if (isset($data->attachments))
             $product->setImages(array_map(fn ($attachment) => $attachment->image, $data->attachments));
 
