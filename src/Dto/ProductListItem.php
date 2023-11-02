@@ -20,6 +20,9 @@ class ProductListItem
     private array $images;
     private ?string $category;
     private string $slug;
+    private int $width;
+    private int $height;
+    private int $depth;
     public function getId(): int
     {
         return $this->id;
@@ -155,6 +158,39 @@ class ProductListItem
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+        return $this;
+    }
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(int $width): self
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    public function setHeight(int $height): self
+    {
+        $this->height = $height;
+        return $this;
+    }
+
+    public function getDepth(): int
+    {
+        return $this->depth;
+    }
+
+
+    public function setDepth(int $depth): self
+    {
+        $this->depth = $depth;
         return $this;
     }
 }

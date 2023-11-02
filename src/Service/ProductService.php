@@ -32,10 +32,10 @@ class ProductService
         );
     }
 
-    public function getProduct(int $id): ProductListItem
+    public function getProductBySlug(string $slug): ProductListItem
     {
 
-        $product = $this->productRepository->find($id);
+        $product = $this->productRepository->findOneBy(['slug' => $slug]);
 
         $serializeProduct = $this->serializer->serialize($product, 'json', ['groups' => ['product']]);
 

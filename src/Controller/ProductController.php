@@ -33,7 +33,7 @@ class ProductController extends AbstractController
         return $this->json($this->productService->getProducts());
     }
 
-    #[Route(path: '/{id}', name: 'show', methods: ['GET'])]
+    #[Route(path: '/{slug}', name: 'show', methods: ['GET'])]
     #[OA\Response(
         response: 200,
         description: 'Return product',
@@ -41,9 +41,9 @@ class ProductController extends AbstractController
             ref: new Model(type: ProductListItem::class)
         )
     )]
-    public function show(int $id)
+    public function show(string $slug)
     {
-        return $this->json($this->productService->getProduct($id));
+        return $this->json($this->productService->getProductBySlug($slug));
     }
     
 }

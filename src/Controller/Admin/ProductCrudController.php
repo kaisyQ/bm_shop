@@ -67,6 +67,12 @@ class ProductCrudController extends AbstractCrudController
 
         yield IntegerField::new('count');
 
+        yield IntegerField::new('width');
+
+        yield IntegerField::new('height');
+
+        yield IntegerField::new('depth');
+
         yield BooleanField::new('bestseller');
         
         yield TextareaField::new('delivery')

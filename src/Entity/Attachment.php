@@ -21,7 +21,7 @@ class Attachment
     private $id;
 
     #[ORM\Column(type: "string", length: 255)]
-    #[Groups("product")]
+    #[Groups(["product", "search"])]
     private ?string $image = null;
 
     #[Vich\UploadableField(mapping: "attachments", fileNameProperty: "image")]

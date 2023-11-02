@@ -17,11 +17,11 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups("product")]
+    #[Groups(["product", "search"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups("product")]
+    #[Groups(["product", "search"])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -60,12 +60,24 @@ class Product
     private ?int $count = null;
 
     #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: "product", cascade: ["persist", "remove"])]
-    #[Groups("product")]
+    #[Groups(["product", "search"])]
     private Collection $attachments;
 
     #[ORM\Column(length: 255)]
-    #[Groups("product")]
+    #[Groups(["product", "search"])]
     private ?string $slug = null;
+
+    #[ORM\Column]
+    #[Groups("product")]
+    private ?int $width = null;
+
+    #[ORM\Column]
+    #[Groups("product")]
+    private ?int $height = null;
+
+    #[ORM\Column]
+    #[Groups("product")]
+    private ?int $depth = null;
 
     public function __construct()
     {
@@ -90,7 +102,7 @@ class Product
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -102,7 +114,7 @@ class Product
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -114,7 +126,7 @@ class Product
         return $this->delivery;
     }
 
-    public function setDelivery(string $delivery): static
+    public function setDelivery(string $delivery): self
     {
         $this->delivery = $delivery;
 
@@ -126,7 +138,7 @@ class Product
         return $this->price;
     }
 
-    public function setPrice(int $price): static
+    public function setPrice(int $price): self
     {
         $this->price = $price;
 
@@ -138,7 +150,7 @@ class Product
         return $this->discountPrice;
     }
 
-    public function setDiscountPrice(?int $discountPrice): static
+    public function setDiscountPrice(?int $discountPrice): self
     {
         $this->discountPrice = $discountPrice;
 
@@ -150,7 +162,7 @@ class Product
         return $this->bestseller;
     }
 
-    public function setBestseller(?bool $bestseller): static
+    public function setBestseller(?bool $bestseller): self
     {
         $this->bestseller = $bestseller;
 
@@ -162,7 +174,7 @@ class Product
         return $this->category;
     }
 
-    public function setCategory(?Category $category): static
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
@@ -174,7 +186,7 @@ class Product
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -186,7 +198,7 @@ class Product
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -198,7 +210,7 @@ class Product
         return $this->count;
     }
 
-    public function setCount(int $count): static
+    public function setCount(int $count): self
     {
         $this->count = $count;
 
@@ -241,7 +253,7 @@ class Product
         return $this->slug;
     }
 
-    public function setSlug(?string $slug): static
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
 
@@ -253,5 +265,41 @@ class Product
         if (!$this->slug || '-' === $this->slug) {
             $this->slug = $sluggerInterface->slug($this->name)->lower();
         }
+    }
+
+    public function getWidth(): ?int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(int $width): self
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->height;
+    }
+
+    public function setHeight(int $height): self
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getDepth(): ?int
+    {
+        return $this->depth;
+    }
+
+    public function setDepth(int $depth): self
+    {
+        $this->depth = $depth;
+
+        return $this;
     }
 }
