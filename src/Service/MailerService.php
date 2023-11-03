@@ -25,7 +25,7 @@ class MailerService
 
         $email = (new TemplatedEmail())
             ->from('bmshopcanada@gmail.com')
-            ->to('nafan9roma8@gmail.com')
+            ->to('BM.unique.furniture.finds@gmail.com')
             ->subject('A message from contact form!')
             ->text($request->getMessage())
             ->html('
@@ -49,7 +49,7 @@ class MailerService
         $mailer = new Mailer($transport);
         $email = (new TemplatedEmail())
             ->from('bmshopcanada@gmail.com')
-            ->to('nafan9roma8@gmail.com')
+            ->to('BM.unique.furniture.finds@gmail.com')
             ->subject('A message from sell couch form!')
             ->text($request->getMessage())
             ->html('
