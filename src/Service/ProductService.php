@@ -19,8 +19,20 @@ class ProductService
         private ProductNormalizer $productNormalizer,
     ) {
     }
-    public function getProducts(?string $categorySlug): ProductListResponse
+    public function getProducts(?string $categorySlug, ?bool $bestseller): ProductListResponse
     {
+
+        if ($bestseller) {
+            $products = $this->productRepository->findBy(['bestseller' => true]);
+            $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
+            return new ProductListResponse(
+                array_map(
+                    fn ($product) => $this->productNormalizer->denormalize($product, ProductListItem::class),
+                    json_decode($serializedProducts)
+                )
+            );
+        }
+
         $products = [];
         
         if ($categorySlug) {

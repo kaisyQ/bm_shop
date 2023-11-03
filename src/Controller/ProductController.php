@@ -28,9 +28,9 @@ class ProductController extends AbstractController
             items: new OA\Items(ref: new Model(type: ProductListResponse::class))
         ),
     )]
-    public function index(#[MapQueryParameter] ?string $category)
+    public function index(#[MapQueryParameter] ?string $category, #[MapQueryParameter] ?bool $bestseller)
     {
-        return $this->json($this->productService->getProducts($category));
+        return $this->json($this->productService->getProducts($category, $bestseller));
     }
 
     #[Route(path: '/{slug}', name: 'show', methods: ['GET'])]
