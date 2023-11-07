@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Dto\ProductListItem;
 use App\Dto\ProductListResponse;
 use App\Service\ProductService;
+use OpenApi\Attributes\Schema;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
@@ -28,9 +29,17 @@ class ProductController extends AbstractController
             items: new OA\Items(ref: new Model(type: ProductListResponse::class))
         ),
     )]
-    public function index(#[MapQueryParameter] ?string $category, #[MapQueryParameter] ?bool $bestseller)
-    {
-        return $this->json($this->productService->getProducts($category, $bestseller));
+    #[OA\QueryParameter(name: "bestseller", schema: new Schema(type: "?bool"))]
+    #[OA\QueryParameter(name: "category", schema: new Schema(type: "?string"))]
+    #[OA\QueryParameter(name: "limit", schema: new Schema(type: "?int"))]
+    #[OA\QueryParameter(name: "page", schema: new Schema(type: "?int"))]
+    public function index(
+        #[MapQueryParameter] ?string $category,
+        #[MapQueryParameter] ?bool $bestseller,
+        #[MapQueryParameter] ?int $limit,
+        #[MapQueryParameter] ?int $page
+    ) {
+        return $this->json($this->productService->getProducts($category, $bestseller, $page, $limit));
     }
 
     #[Route(path: '/{slug}', name: 'show', methods: ['GET'])]
@@ -45,5 +54,4 @@ class ProductController extends AbstractController
     {
         return $this->json($this->productService->getProductBySlug($slug));
     }
-    
 }
