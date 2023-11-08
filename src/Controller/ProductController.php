@@ -29,17 +29,15 @@ class ProductController extends AbstractController
             items: new OA\Items(ref: new Model(type: ProductListResponse::class))
         ),
     )]
-    #[OA\QueryParameter(name: "bestseller", schema: new Schema(type: "?bool"))]
     #[OA\QueryParameter(name: "category", schema: new Schema(type: "?string"))]
     #[OA\QueryParameter(name: "limit", schema: new Schema(type: "?int"))]
     #[OA\QueryParameter(name: "page", schema: new Schema(type: "?int"))]
     public function index(
         #[MapQueryParameter] ?string $category,
-        #[MapQueryParameter] ?bool $bestseller,
         #[MapQueryParameter] ?int $limit,
         #[MapQueryParameter] ?int $page
     ) {
-        return $this->json($this->productService->getProducts($category, $bestseller, $page, $limit));
+        return $this->json($this->productService->getProducts($category, $page, $limit));
     }
 
     #[Route(path: '/{slug}', name: 'show', methods: ['GET'])]

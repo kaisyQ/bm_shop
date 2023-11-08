@@ -21,19 +21,8 @@ class ProductService
         private ProductNormalizer $productNormalizer,
     ) {
     }
-    public function getProducts(?string $categorySlug, ?bool $bestseller, ?int $queryPage, ?int $queryLimit): ProductListResponse
+    public function getProducts(?string $categorySlug, ?int $queryPage, ?int $queryLimit): ProductListResponse
     {
-
-        if ($bestseller) {
-            $products = $this->productRepository->findBy(['bestseller' => true]);
-            $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
-            return new ProductListResponse(
-                array_map(
-                    fn ($product) => $this->productNormalizer->denormalize($product, ProductListItem::class),
-                    json_decode($serializedProducts)
-                )
-            );
-        }
 
         $limit = $this->getLimit($queryLimit);
         $page = $this->getPage($queryPage);
@@ -42,13 +31,15 @@ class ProductService
         
         $category = $this->categoryRepository->findOneBy(['slug' => $categorySlug]);
         $products = $this->productRepository->paginateProducts($limit, $offset, $category);
+        $total = $this->productRepository->getTotalProductsCount($category);
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
 
         return new ProductListResponse(
             array_map(
                 fn ($product) => $this->productNormalizer->denormalize($product, ProductListItem::class),
                 json_decode($serializedProducts)
-            )
+            ),
+            $total
         );
     }
 
