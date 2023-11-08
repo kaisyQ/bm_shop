@@ -1,19 +1,27 @@
 <?php
 
 namespace App\Dto;
+
 class BestsellerListItem
 {
     private int $id;
     private string $name;
+    private string $slug;
     private int $price;
     private ?int $discountPrice = null;
 
-    public function __construct(int $id, string $name, int $price, ?int $discountPrice = null)
+    /**
+     * @var string[] $images
+     */
+    private array $images;
+    public function __construct(int $id, string $name, string $slug, int $price, ?int $discountPrice = null, array $images)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->slug = $slug;
         $this->price = $price;
         $this->discountPrice = $discountPrice;
+        $this->images = $images;
     }
     public function getId(): int
     {
@@ -37,11 +45,11 @@ class BestsellerListItem
         return $this;
     }
 
-    public function getPrice(): string
+    public function getPrice(): int
     {
         return $this->price;
     }
-    public function setPrice(string $price): self
+    public function setPrice(int $price): self
     {
         $this->price = $price;
         return $this;
@@ -54,6 +62,25 @@ class BestsellerListItem
     public function setDiscountPrice(?int $discountPrice): self
     {
         $this->discountPrice = $discountPrice;
+        return $this;
+    }
+    public function getImages(): array
+    {
+        return $this->images;
+    }
+
+    public function setImages(array $images): self
+    {
+        $this->images = $images;
+        return $this;
+    }
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 }

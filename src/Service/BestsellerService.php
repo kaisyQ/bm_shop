@@ -6,7 +6,6 @@ namespace App\Service;
 use App\Dto\BestsellerListItem;
 use App\Dto\BestsellerListResponse;
 use App\Repository\ProductRepository;
-use App\Serializer\Normalizer\ProductNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class BestsellerService
@@ -14,7 +13,6 @@ class BestsellerService
     public function __construct(
         private ProductRepository $productRepository,
         private SerializerInterface $serializer,
-        private ProductNormalizer $productNormalizer,
     ) {
     }
 
@@ -26,7 +24,14 @@ class BestsellerService
         return new BestsellerListResponse(
             array_map(
                 fn ($product) =>
-                new BestsellerListItem($product->id, $product->name, $product->price, $product->discountPrice),
+                new BestsellerListItem(
+                    $product->id,
+                    $product->name,
+                    $product->slug,
+                    $product->price,
+                    $product->discountPrice,
+                    array_map(fn ($attachment) => $attachment->image, $product->attachments)
+                ),
                 json_decode($serializedProducts)
             )
         );
