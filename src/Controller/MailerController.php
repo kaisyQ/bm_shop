@@ -6,11 +6,12 @@ use App\Dto\ContactUsRequest;
 use App\Dto\SellCouchRequest;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route(path: "/api/v1/mailer", name: "mailer_controller")]
 class MailerController extends AbstractController
@@ -26,7 +27,7 @@ class MailerController extends AbstractController
             ref: new Model(type: ContactUsRequest::class)
         )
     )]
-    public function contact(#[MapRequestPayload] ContactUsRequest $request)
+    public function contact(#[MapRequestPayload] ContactUsRequest $request): JsonResponse
     {
         $this->mailerService->sendContactMessage($request);
         return $this->json(['send' => true]);
@@ -34,13 +35,35 @@ class MailerController extends AbstractController
 
     #[Route(path: "/sell_couch", name: "sell_couch", methods: ["POST"])]
     #[OA\RequestBody(
-        content: new OA\JsonContent(
-            ref: new Model(type: SellCouchRequest::class)
-        )
+        content: [
+            new OA\MediaType(
+                mediaType: 'multipart/form-data',
+                schema: new OA\Schema(properties: [
+                    new OA\Property(
+                        property: 'uploaded_images[]',
+                        type: 'array',
+                        items: new OA\Items(type: 'file')
+                    ),
+                    new OA\Property(
+                        property: 'body',
+                        type: 'json',
+                        ref: new Model(type: SellCouchRequest::class),
+
+                    )
+                ])
+            ),
+        ]
     )]
-    public function sell(#[MapRequestPayload] SellCouchRequest $request)
+    public function sell(Request $request): JsonResponse
     {
-        $this->mailerService->sendSellCouchMessage($request);
+
+        $body = json_decode($request->request->get('body'));
+
+        $this->mailerService->sendSellCouchMessage(
+            $request->files->get("uploaded_images"),
+            new SellCouchRequest($body->name, $body->email, $body->phone, $body->message, $body->brand)
+        );
+
         return $this->json(['send' => true]);
     }
 }
