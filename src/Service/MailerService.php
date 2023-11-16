@@ -44,7 +44,7 @@ class MailerService
         $mailer->send($email);
     }
 
-    public function sendSellCouchMessage (SellCouchRequest $request) {
+    public function sendSellCouchMessage (array $files, SellCouchRequest $request) {
         $transport = Transport::fromDsn("smtp://bmshopcanada@gmail.com:njdnpalbdtzfveah@smtp.gmail.com:587");
         $mailer = new Mailer($transport);
         $email = (new TemplatedEmail())
@@ -64,7 +64,10 @@ class MailerService
                 </body>
                 '
             );
-
+        
+        foreach($files as $file) {
+            $email->attachFromPath($file->getPathname(), $file->getClientOriginalName());
+        }
             
         $mailer->send($email);
     }
