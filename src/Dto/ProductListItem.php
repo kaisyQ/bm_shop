@@ -13,12 +13,12 @@ class ProductListItem
     private string $delivery;
     private string $description;
     private int $price;
-    private ?int $discountPrice;
+    private ?int $discountPrice = null;
     private int $count;
     private bool $bestseller;
     private DateTimeImmutable $createdAt;
     private array $images;
-    private ?string $category;
+    private ?string $category = null;
     private string $slug;
     private int $width;
     private int $height;

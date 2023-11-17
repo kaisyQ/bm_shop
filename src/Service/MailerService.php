@@ -7,7 +7,6 @@ use App\Dto\ContactUsRequest;
 use App\Dto\SellCouchRequest;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
-use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 

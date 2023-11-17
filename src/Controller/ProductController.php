@@ -49,7 +49,7 @@ class ProductController extends AbstractController
         )
     )]
     public function show(string $slug)
-    {
+    {   
         return $this->json($this->productService->getProductBySlug($slug));
     }
 }

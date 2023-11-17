@@ -14,7 +14,7 @@ class BestsellerListItem
      * @var string[] $images
      */
     private array $images;
-    public function __construct(int $id, string $name, string $slug, int $price, ?int $discountPrice = null, array $images)
+    public function __construct(int $id, string $name, string $slug, int $price, array $images, ?int $discountPrice = null)
     {
         $this->id = $id;
         $this->name = $name;
