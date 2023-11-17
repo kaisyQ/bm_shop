@@ -29,8 +29,8 @@ class BestsellerService
                     $product->name,
                     $product->slug,
                     $product->price,
+                    array_map(fn ($attachment) => $attachment->image, $product->attachments),
                     $product->discountPrice,
-                    array_map(fn ($attachment) => $attachment->image, $product->attachments)
                 ),
                 json_decode($serializedProducts)
             )
