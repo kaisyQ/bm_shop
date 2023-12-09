@@ -5,16 +5,18 @@ namespace App\Utils;
 
 trait Pager
 {
-    static $defaultPageSize = 6;
+    static int $defaultPageSize = 6;
 
     public function getLimit(?int $limit): int
     {
         if (!isset($limit)) {
             return self::$defaultPageSize;
         }
-        if ($limit > 6 && $limit < 4) {
+
+        if ($limit < 6 && $limit > 4) {
             return self::$defaultPageSize;
         }
+
         return $limit;
     }
 

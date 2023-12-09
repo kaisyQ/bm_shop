@@ -13,7 +13,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 #[Route(path: "/api/v1/bestsellers", name: "bestseller")]
 class BestsellerController extends AbstractController
 {
-    public function __construct(private BestsellerService $bestsellerService)
+    public function __construct(private readonly BestsellerService $bestsellerService)
     {
     }
 

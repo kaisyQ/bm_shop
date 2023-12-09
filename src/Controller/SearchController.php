@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\SearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -13,7 +14,7 @@ use App\Dto\SearchListItem;
 
 class SearchController extends AbstractController
 {
-    public function __construct(private SearchService $searchService)
+    public function __construct(private readonly SearchService $searchService)
     {
     }
 
@@ -26,7 +27,7 @@ class SearchController extends AbstractController
             items: new OA\Items(ref: new Model(type: SearchListItem::class))
         )
     )]
-    public function index(string $query)
+    public function index(string $query): JsonResponse
     {
         return $this->json($this->searchService->search($query));
     }
