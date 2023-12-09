@@ -3,12 +3,14 @@
 namespace App\Serializer\Normalizer;
 
 use App\Dto\ProductListItem;
-use DateTimeImmutable;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 
 class ProductNormalizer implements DenormalizerInterface
 {
+    /**
+     * @throws \Exception
+     */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): ProductListItem
     {
 
@@ -39,7 +41,7 @@ class ProductNormalizer implements DenormalizerInterface
             $product->setBestseller($data->bestseller);
 
         if (isset($data->createdAt))
-            $product->setCreatedAt(new DateTimeImmutable($data->createdAt));
+            $product->setCreatedAt(new \DateTimeImmutable($data->createdAt));
 
         if (isset($data->category))
             $product->setCategory($data->category->name);

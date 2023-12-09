@@ -10,13 +10,13 @@ use Symfony\Component\Mailer\Transport;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 
-class MailerService
+final class MailerService
 {
     public function __construct()
     {
     }
 
-    public function sendContactMessage(ContactUsRequest $request)
+    public function sendContactMessage(ContactUsRequest $request): void
     {
         $transport = Transport::fromDsn("smtp://bmshopcanada@gmail.com:njdnpalbdtzfveah@smtp.gmail.com:587");
 
@@ -43,7 +43,8 @@ class MailerService
         $mailer->send($email);
     }
 
-    public function sendSellCouchMessage (array $files, SellCouchRequest $request) {
+    public function sendSellCouchMessage (array $files, SellCouchRequest $request): void
+    {
         $transport = Transport::fromDsn("smtp://bmshopcanada@gmail.com:njdnpalbdtzfveah@smtp.gmail.com:587");
         $mailer = new Mailer($transport);
         $email = (new TemplatedEmail())

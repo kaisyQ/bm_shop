@@ -8,20 +8,20 @@ use App\Dto\ProductListItem;
 use App\Repository\CategoryRepository;
 use App\Serializer\Normalizer\ProductNormalizer;
 use App\Utils\Pager;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Phpml\Clustering\KMeans;
 
-class ProductService
+final class ProductService
 {
 
     use Pager;
     public function __construct(
-        private ProductRepository $productRepository,
-        private CategoryRepository $categoryRepository,
-        private SerializerInterface $serializer,
-        private ProductNormalizer $productNormalizer,
-    ) {
-    }
+        private readonly ProductRepository $productRepository,
+        private readonly CategoryRepository $categoryRepository,
+        private readonly SerializerInterface $serializer,
+        private readonly ProductNormalizer $productNormalizer,
+    ) {}
     public function getProducts(?string $categorySlug, ?int $queryPage, ?int $queryLimit): ProductListResponse
     {
 
@@ -37,7 +37,10 @@ class ProductService
 
         return new ProductListResponse(
             array_map(
-                fn ($product) => $this->productNormalizer->denormalize($product, ProductListItem::class),
+            /**
+             * @throws ExceptionInterface
+             */
+            fn ($product) => $this->productNormalizer->denormalize($product, ProductListItem::class),
                 json_decode($serializedProducts)
             ),
             $total

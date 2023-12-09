@@ -12,15 +12,15 @@ use Doctrine\ORM\Events;
 #[AsEntityListener(event: Events::preUpdate, entity: Product::class)]
 class ProductEntityListener {
     public function __construct(
-        private SluggerInterface $slugger,
+        private readonly SluggerInterface $slugger,
     ) {}
 
-    public function prePersist(Product $category, \Doctrine\ORM\Event\LifecycleEventArgs $lifecycleEventArgs)
+    public function prePersist(Product $category, \Doctrine\ORM\Event\LifecycleEventArgs $lifecycleEventArgs): void
     {
         $category->computeSlug($this->slugger);
     }
 
-    public function preUpdate(Product $category, \Doctrine\ORM\Event\LifecycleEventArgs $lifecycleEventArgs)
+    public function preUpdate(Product $category, \Doctrine\ORM\Event\LifecycleEventArgs $lifecycleEventArgs): void
     {
         $category->computeSlug($this->slugger);
     }

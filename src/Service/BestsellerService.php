@@ -8,7 +8,7 @@ use App\Dto\BestsellerListResponse;
 use App\Repository\ProductRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class BestsellerService
+final class BestsellerService
 {
     public function __construct(
         private ProductRepository $productRepository,

@@ -39,6 +39,7 @@ class ProductController extends AbstractController
         #[MapQueryParameter] ?int $page
     ): JsonResponse
     {
+        throw new \Exception("sada", 500);
         return $this->json($this->productService->getProducts($category, $page, $limit));
     }
 

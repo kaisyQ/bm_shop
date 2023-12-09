@@ -10,20 +10,18 @@ use App\Repository\ProductRepository;
 use App\Serializer\Normalizer\ProductNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class SearchService
+final class SearchService
 {
     public function __construct(
-        private ProductRepository $productRepository,
-        private SerializerInterface $serializer,
-        private ProductNormalizer $productNormalizer
+        private readonly ProductRepository $productRepository,
+        private readonly SerializerInterface $serializer,
     ) {
     }
-    public function search(string $query)
+    public function search(string $query): SearchListResponse
     {
         $products = $this->productRepository->findByContainingName($query);
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['search']]);
-        
-        //dd($serializedProducts);
+
         return new SearchListResponse(
             array_map(
                 fn ($product) => new SearchListItem($product->id, $product->name, $product->slug, $product->attachments[0]->image),
