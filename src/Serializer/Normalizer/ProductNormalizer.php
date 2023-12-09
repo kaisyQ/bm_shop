@@ -6,7 +6,7 @@ use App\Dto\ProductListItem;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 
-class ProductNormalizer implements DenormalizerInterface
+final class ProductNormalizer implements DenormalizerInterface
 {
     /**
      * @throws \Exception

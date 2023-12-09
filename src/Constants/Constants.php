@@ -3,7 +3,7 @@
 
 namespace App\Constants;
 
-class Constants
+final class Constants
 {
     const DELIVERY_MESSAGE = "
         Hello valued customer, \n

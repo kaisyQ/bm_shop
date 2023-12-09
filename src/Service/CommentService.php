@@ -10,7 +10,8 @@ use App\Dto\UpdateCommentRequest;
 use App\Entity\Comment;
 use App\Exception\DatabaseCreateException;
 use App\Exception\DatabaseDeleteException;
-use App\Exception\DatabaseUpdateException;
+use App\Exception\DatabaseException;
+use App\Exception\ValidateException;
 use App\Mapper\CommentItemResponseMapper;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,6 +44,9 @@ final class CommentService
         return $this->commentMapper->mapFromComment($comment);
     }
 
+    /**
+     * @throws DatabaseException
+     */
     public function deleteCommentById(int $id): ?int
     {
         $comment = $this->commentRepository->find($id);
@@ -60,7 +64,7 @@ final class CommentService
         }
         catch (\Exception $exp)
         {
-            throw new DatabaseDeleteException(
+            throw new DatabaseException(
                 ExceptionInfo::getMessageByKey(ExceptionCode::DELETE_DATABASE_ERROR),
                 ExceptionCode::DELETE_DATABASE_ERROR
             );
@@ -71,7 +75,7 @@ final class CommentService
     }
 
     /**
-     * @throws DatabaseCreateException
+     * @throws DatabaseException
      */
     public function createComment(CreateCommentRequest $request): CommentListItem
     {
@@ -89,7 +93,7 @@ final class CommentService
         }
         catch (\Exception $exp)
         {
-            throw new DatabaseCreateException(
+            throw new DatabaseException(
                 ExceptionInfo::getMessageByKey(ExceptionCode::CREATE_DATABASE_ERROR),
                 ExceptionCode::CREATE_DATABASE_ERROR
             );
@@ -99,7 +103,8 @@ final class CommentService
     }
 
     /**
-     * @throws DatabaseUpdateException
+     * @throws DatabaseException
+     * @throws ValidateException
      */
     public function updateCommentById(int $id, UpdateCommentRequest $request): ?CommentListItem
     {
@@ -141,7 +146,7 @@ final class CommentService
         }
         catch (\Exception $exp)
         {
-            throw new DatabaseUpdateException(
+            throw new DatabaseException(
                 ExceptionInfo::getMessageByKey(ExceptionCode::UPDATE_DATABASE_ERROR),
                 ExceptionCode::UPDATE_DATABASE_ERROR
             );

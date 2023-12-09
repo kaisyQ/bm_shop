@@ -2,7 +2,7 @@
 
 namespace App\Constants;
 
-class ExceptionInfo
+final class ExceptionInfo
 {
     const ExceptionInfoArray = [
 
@@ -14,11 +14,11 @@ class ExceptionInfo
 
     ];
 
-    public static function getMessageByKey (int $key)
+    public static function getMessageByKey (int $key): string
     {
         return self::ExceptionInfoArray[$key];
     }
-    public static function getExceptionInfoArray ()
+    public static function getExceptionInfoArray (): array
     {
         return self::ExceptionInfoArray;
     }

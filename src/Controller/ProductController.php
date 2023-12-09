@@ -3,8 +3,11 @@
 
 namespace App\Controller;
 
+use App\Constants\ExceptionCode;
 use App\Dto\ProductListItem;
 use App\Dto\ProductListResponse;
+use App\Exception\DatabaseException;
+use App\Service\Logger\LoggerServiceInterface;
 use App\Service\ProductService;
 use OpenApi\Attributes\Schema;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +20,9 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 #[Route(path: "/api/v1/products", name: "product_controller")]
 class ProductController extends AbstractController
 {
-    public function __construct(private readonly ProductService $productService)
+    public function __construct(
+        private readonly ProductService $productService,
+    )
     {
     }
     #[Route(path: "/", name: "index", methods: ["GET"])]
@@ -39,7 +44,7 @@ class ProductController extends AbstractController
         #[MapQueryParameter] ?int $page
     ): JsonResponse
     {
-        throw new \Exception("sada", 500);
+        throw new DatabaseException("update error", ExceptionCode::UPDATE_DATABASE_ERROR);
         return $this->json($this->productService->getProducts($category, $page, $limit));
     }
 

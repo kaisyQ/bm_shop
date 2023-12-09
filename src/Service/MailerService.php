@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Dto\ContactUsRequest;
 use App\Dto\SellCouchRequest;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -16,6 +17,9 @@ final class MailerService
     {
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     public function sendContactMessage(ContactUsRequest $request): void
     {
         $transport = Transport::fromDsn("smtp://bmshopcanada@gmail.com:njdnpalbdtzfveah@smtp.gmail.com:587");
@@ -43,6 +47,9 @@ final class MailerService
         $mailer->send($email);
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     public function sendSellCouchMessage (array $files, SellCouchRequest $request): void
     {
         $transport = Transport::fromDsn("smtp://bmshopcanada@gmail.com:njdnpalbdtzfveah@smtp.gmail.com:587");

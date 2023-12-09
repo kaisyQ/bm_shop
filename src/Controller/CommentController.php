@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Dto\CommentListItem;
 use App\Dto\CreateCommentRequest;
 use App\Dto\UpdateCommentRequest;
+use App\Exception\DatabaseCreateException;
+use App\Exception\DatabaseDeleteException;
+use App\Exception\DatabaseException;
 use App\Service\CommentService;
 use App\Dto\CommentList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,6 +54,9 @@ class CommentController extends AbstractController
     }
 
 
+    /**
+     * @throws DatabaseCreateException
+     */
     #[Route(path: "/create", name: "comment_store", methods: ["POST"])]
     #[OA\Response(
         response: 200,
@@ -70,6 +76,9 @@ class CommentController extends AbstractController
         return $this->json($this->commentService->createComment($request));
     }
 
+    /**
+     * @throws DatabaseException
+     */
     #[Route(path: "/update/{id}", name: "comment_update", methods: ["PUT"])]
     #[OA\Response(
         response: 200,
@@ -89,6 +98,9 @@ class CommentController extends AbstractController
         return $this->json($this->commentService->updateCommentById($id, $request));
     }
 
+    /**
+     * @throws DatabaseDeleteException
+     */
     #[Route(path: "/delete/{id}", name: "comment_destroy", methods: ['DELETE'])]
     #[OA\Response(
         response: 200,

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Exception\ValidateException;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -70,8 +71,13 @@ class Comment
         return $this->stars;
     }
 
+    /**
+     * @throws ValidateException
+     */
     public function setStars(int $stars): static
     {
+        $this->validateStars($stars);
+
         $this->stars = $stars;
 
         return $this;
@@ -113,4 +119,14 @@ class Comment
         return $this;
     }
 
+
+    /**
+     * @throws ValidateException
+     */
+    private function validateStars (int $value): void
+    {
+        if ($value >= 1 && $value <= 5) return;
+
+        throw new ValidateException('stars value need to be more than 0 and less than 6');
+    }
 }
