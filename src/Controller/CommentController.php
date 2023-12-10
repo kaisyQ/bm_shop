@@ -5,14 +5,12 @@ namespace App\Controller;
 use App\Dto\CommentListItem;
 use App\Dto\CreateCommentRequest;
 use App\Dto\UpdateCommentRequest;
-use App\Exception\DatabaseCreateException;
-use App\Exception\DatabaseDeleteException;
 use App\Exception\DatabaseException;
+use App\Exception\ValidateException;
 use App\Service\CommentService;
 use App\Dto\CommentList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,7 +53,7 @@ class CommentController extends AbstractController
 
 
     /**
-     * @throws DatabaseCreateException
+     * @throws DatabaseException
      */
     #[Route(path: "/create", name: "comment_store", methods: ["POST"])]
     #[OA\Response(
@@ -78,6 +76,7 @@ class CommentController extends AbstractController
 
     /**
      * @throws DatabaseException
+     * @throws ValidateException
      */
     #[Route(path: "/update/{id}", name: "comment_update", methods: ["PUT"])]
     #[OA\Response(
@@ -99,7 +98,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @throws DatabaseDeleteException
+     * @throws DatabaseException
      */
     #[Route(path: "/delete/{id}", name: "comment_destroy", methods: ['DELETE'])]
     #[OA\Response(
