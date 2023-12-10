@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route(path: "/api/v1/mailer", name: "mailer_controller")]
 class MailerController extends AbstractController
 {
-    public function __construct(private MailerService $mailerService)
+    public function __construct(private readonly MailerService $mailerService)
     {
     }
 
@@ -46,8 +46,8 @@ class MailerController extends AbstractController
                     ),
                     new OA\Property(
                         property: 'body',
-                        type: 'json',
                         ref: new Model(type: SellCouchRequest::class),
+                        type: 'json',
 
                     )
                 ])

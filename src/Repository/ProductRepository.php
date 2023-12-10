@@ -5,8 +5,10 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -16,7 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Product[]    findAll()
  * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductRepository extends ServiceEntityRepository
+class ProductRepository extends ServiceEntityRepository implements IProductRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -36,6 +38,12 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @param Category|null $category
+     * @return Product[]
+     */
     public function paginateProducts(int $limit, int $offset, ?Category $category=null): array
     {
         $qb = $this->createQueryBuilder('p')->select('p')
@@ -45,7 +53,7 @@ class ProductRepository extends ServiceEntityRepository
             $qb->where('p.category = :category')->setParameter('category', $category);
         }
 
-        return $qb->getQuery()->getResult(Query::HYDRATE_SIMPLEOBJECT);
+        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SIMPLEOBJECT);
     }
 
     public function getTotalProductsCount(?Category $category): int
@@ -56,6 +64,6 @@ class ProductRepository extends ServiceEntityRepository
             $qb->where('p.category = :category')->setParameter('category', $category);
         }
 
-        return $qb->getQuery()->getResult(Query::HYDRATE_SINGLE_SCALAR);
+        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
     }
 }

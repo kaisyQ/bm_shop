@@ -21,7 +21,7 @@ class UpdateCommentRequest
     }
 
     /**
-     * @param  $username 
+     * @param string|null $username
      * @return self
      */
     public function setUsername(?string $username): self
@@ -36,7 +36,7 @@ class UpdateCommentRequest
     }
 
     /**
-     * @param  $text 
+     * @param string|null $text
      * @return self
      */
     public function setText(?string $text): self
@@ -51,7 +51,7 @@ class UpdateCommentRequest
     }
 
     /**
-     * @param  $stars 
+     * @param int|null $stars
      * @return self
      */
     public function setStars(?int $stars): self

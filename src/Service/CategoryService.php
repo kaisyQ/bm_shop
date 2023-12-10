@@ -7,7 +7,7 @@ use App\Dto\CategoryListResponse;
 use App\Repository\CategoryRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class CategoryService
+final class CategoryService
 {
     public function __construct(
         private CategoryRepository $categoryRepository,

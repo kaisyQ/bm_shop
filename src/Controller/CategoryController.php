@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Dto\CategoryListItem;
 use App\Service\CategoryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -13,7 +14,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 class CategoryController extends AbstractController
 {
 
-    public function __construct(private CategoryService $categoryService)
+    public function __construct(private readonly CategoryService $categoryService)
     {
     }
 
@@ -25,7 +26,7 @@ class CategoryController extends AbstractController
             ref: new Model(type: CategoryListItem::class)
         )
     )]
-    public function index()
+    public function index(): JsonResponse
     {
         return $this->json($this->categoryService->getCategories());
     }
