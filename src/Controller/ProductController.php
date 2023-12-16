@@ -44,7 +44,6 @@ class ProductController extends AbstractController
         #[MapQueryParameter] ?int $page
     ): JsonResponse
     {
-        throw new DatabaseException("update error", ExceptionCode::UPDATE_DATABASE_ERROR);
         return $this->json($this->productService->getProducts($category, $page, $limit));
     }
 
