@@ -26,6 +26,23 @@ interface IProductRepositoryInterface
      * Nullable param category
      * @param Category|null $category
      *
+     * Price lowest value
+     * @param int|null $priceFrom
+     *
+     * Price highest value
+     * @param int|null $priceTo
+     *
+     * Alphabet filter a-z
+     * @param bool|null $alphabetAtoZ
+     *
+     * Alphabet filter z-a
+     * @param bool|null $alphabetZtoA
+     *
+     * Date filters
+     * //
+     * @param bool|null $newest
+     * @param bool|null $oldest
+     * //
      *
      * @return Product[]
      *
@@ -33,7 +50,17 @@ interface IProductRepositoryInterface
      * By default paginate all products
      */
 
-    public function paginateProducts(int $limit, int $offset, ?Category $category=null): array;
+    public function paginateProducts(
+        int $limit,
+        int $offset,
+        ?Category $category=null,
+        ?int $priceFrom=null,
+        ?int $priceTo=null,
+        ?bool $alphabetAtoZ=false,
+        ?bool $alphabetZtoA=false,
+        ?bool $oldest=false,
+        ?bool $newest=false
+    ): array;
 
     /**
      * @param Category|null $category
@@ -42,5 +69,5 @@ interface IProductRepositoryInterface
      * Method return total count of products
      *
      */
-    public function getTotalProductsCount(?Category $category): int;
+    public function getTotalProductsCount(?Category $category, ?int $priceFrom, ?int $priceTo): int;
 }
