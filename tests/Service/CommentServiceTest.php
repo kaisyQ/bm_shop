@@ -4,6 +4,7 @@ namespace App\Test;
 
 use App\Dto\UpdateCommentRequest;
 use App\Entity\Comment;
+use App\Exception\ValidateException;
 use App\Repository\CommentRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,9 @@ use App\Dto\CreateCommentRequest;
 
 class CommentServiceTest extends TestCase
 {
+    /**
+     * @throws ValidateException
+     */
     public function testGetComments()
     {
         $commentRepository = $this->createMock(CommentRepository::class);

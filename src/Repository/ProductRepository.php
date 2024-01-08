@@ -42,9 +42,25 @@ class ProductRepository extends ServiceEntityRepository implements IProductRepos
      * @param int $limit
      * @param int $offset
      * @param Category|null $category
+     * @param int|null $priceTo
+     * @param int|null $priceFrom
+     * @param bool|null $alphabetAtoZ
+     * @param bool|null $alphabetZtoA
+     * @param bool|null $oldest
+     * @param bool|null $newest
      * @return Product[]
      */
-    public function paginateProducts(int $limit, int $offset, ?Category $category=null): array
+    public function paginateProducts(
+        int $limit,
+        int $offset,
+        ?Category $category=null,
+        ?int $priceFrom=null,
+        ?int $priceTo=null,
+        ?bool $alphabetAtoZ=false,
+        ?bool $alphabetZtoA=false,
+        ?bool $oldest=false,
+        ?bool $newest=false
+    ): array
     {
         $qb = $this->createQueryBuilder('p')->select('p')
             ->setMaxResults($limit)->setFirstResult($offset);
@@ -53,10 +69,37 @@ class ProductRepository extends ServiceEntityRepository implements IProductRepos
             $qb->where('p.category = :category')->setParameter('category', $category);
         }
 
+        if (isset($priceFrom)) {
+            $qb
+                ->andWhere('COALESCE(p.discountPrice, p.price) >= :priceFrom')
+                ->setParameter('priceFrom', $priceFrom);
+        }
+
+        if (isset($priceTo)) {
+            $qb
+                ->andWhere('COALESCE(p.discountPrice, p.price) <= :priceTo')
+                ->setParameter('priceTo', $priceTo);
+        }
+
+        if ($alphabetAtoZ) {
+            $qb->orderBy('p.name', 'ASC');
+        }
+
+        if ($alphabetZtoA) {
+            $qb->orderBy('p.name', 'DESC');
+        }
+
+        if ($oldest) {
+            $qb->addOrderBy('p.createdAt', 'DESC');
+        }
+
+        if ($newest) {
+            $qb->addOrderBy('p.createdAt', 'ASC');
+        }
         return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SIMPLEOBJECT);
     }
 
-    public function getTotalProductsCount(?Category $category): int
+    public function getTotalProductsCount(?Category $category, ?int $priceFrom, ?int $priceTo): int
     {
         $qb = $this->createQueryBuilder('p')->select('COUNT(p)');
 
