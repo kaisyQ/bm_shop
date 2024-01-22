@@ -9,6 +9,5 @@ enum SortByEnum: string
     case ALPHABETICALLY = 'alphabetically';
     case REVERSE_ALPHABETICALLY = 'reverse_alphabetically';
     case LOW_TO_HIGH_PRICE = 'low_to_high_price';
-    case  HIGH_TO_LOW_PRICE = 'high_to_low_price';
-
+    case HIGH_TO_LOW_PRICE = 'high_to_low_price';
 }

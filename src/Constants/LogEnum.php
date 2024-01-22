@@ -9,5 +9,4 @@ enum LogEnum: string
     case NOTICE = 'notice';
     case WARNING = 'warning';
     case INFO = 'info';
-
 }

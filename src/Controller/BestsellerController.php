@@ -31,3 +31,4 @@ class BestsellerController extends AbstractController
         return $this->json($this->bestsellerService->getBestsellers());
     }
 }
+

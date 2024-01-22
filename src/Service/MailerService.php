@@ -8,43 +8,54 @@ use App\Dto\SellCouchRequest;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 
 final class MailerService
 {
-    public function __construct()
-    {
-    }
+    public function __construct(
+        private readonly EmailCreator $emailCreator,
+        private readonly MailHistoryService $mailHistoryService
+    ){}
 
-    /**
-     * @throws TransportExceptionInterface
-     */
     public function sendContactMessage(ContactUsRequest $request): void
     {
         $transport = Transport::fromDsn("smtp://bmshopcanada@gmail.com:njdnpalbdtzfveah@smtp.gmail.com:587");
 
         $mailer = new Mailer($transport);
 
-        $email = (new TemplatedEmail())
-            ->from('bmshopcanada@gmail.com')
-            ->to('BM.unique.furniture.finds@gmail.com')
-            ->subject('A message from contact form!')
-            ->text($request->getMessage())
-            ->html('
-                <body>
-                    <div class="container">
-                        <h3 class="alert alert-primary d-flex justify-content-center">A message from user!</h3>
-                        <p class="alert alert-primary"><strong>User phonenumber:</strong> '. $request->getPhone() . '</p>
-                        <p class="alert alert-primary"><strong>User email:</strong> ' . $request->getEmail() . ' </p>
-                        <p class="alert alert-primary"><strong>User message:</strong> ' . $request->getMessage() . ' </p>
-                    </div>
-                </body>
-                '
+        $email = $this->emailCreator->create($request->getMessage());
+
+        $email->html('
+            <body>
+                <div class="container">
+                    <h3 class="alert alert-primary d-flex justify-content-center">A message from user!</h3>
+                    <p class="alert alert-primary"><strong>User phonenumber:</strong> '. $request->getPhone() . '</p>
+                    <p class="alert alert-primary"><strong>User email:</strong> ' . $request->getEmail() . ' </p>
+                    <p class="alert alert-primary"><strong>User message:</strong> ' . $request->getMessage() . ' </p>
+                </div>
+            </body>
+            '
+        );
+
+
+        try {
+
+            $mailer->send($email);
+
+            $this->mailHistoryService->write(
+                $request->getMessage(),
+                $request->getName(),
+                $request->getPhone(),
+                $request->getEmail(),
+                1
             );
 
-            
-        $mailer->send($email);
+        } catch (\Throwable $e) {
+            /**
+             * @TODO
+             * Здесь должно быть логирование ошибки отправки письма
+             */
+        }
     }
 
     /**
@@ -54,11 +65,7 @@ final class MailerService
     {
         $transport = Transport::fromDsn("smtp://bmshopcanada@gmail.com:njdnpalbdtzfveah@smtp.gmail.com:587");
         $mailer = new Mailer($transport);
-        $email = (new TemplatedEmail())
-            ->from('bmshopcanada@gmail.com')
-            ->to('BM.unique.furniture.finds@gmail.com')
-            ->subject('A message from sell couch form!')
-            ->text($request->getMessage())
+        $email = $this->emailCreator->create($request->getMessage())
             ->html('
                 <body>
                     <div class="container">
@@ -69,8 +76,8 @@ final class MailerService
                         <p class="alert alert-primary"><strong>User message:</strong> ' . $request->getMessage() . ' </p>
                     </div>
                 </body>
-                '
-            );
+            '
+        );
         
         foreach($files as $file) {
             $email->attachFromPath($file->getPathname(), $file->getClientOriginalName());
