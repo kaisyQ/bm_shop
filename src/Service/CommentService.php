@@ -2,14 +2,13 @@
 
 namespace App\Service;
 
+use App\Adapter\CacheAdapter;
 use App\Constants\ExceptionCode;
 use App\Dto\CommentList;
 use App\Dto\CommentListItem;
 use App\Dto\CreateCommentRequest;
 use App\Dto\UpdateCommentRequest;
 use App\Entity\Comment;
-use App\Exception\DatabaseCreateException;
-use App\Exception\DatabaseDeleteException;
 use App\Exception\DatabaseException;
 use App\Exception\ValidateException;
 use App\Mapper\CommentItemResponseMapper;
@@ -17,14 +16,13 @@ use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Constants\ExceptionInfo;
 
-final class CommentService
+final readonly class CommentService
 {
     public function __construct(
-        private readonly CommentRepository $commentRepository,
-        private readonly EntityManagerInterface $em,
-        private readonly CommentItemResponseMapper $commentMapper,
-    ) {
-    }
+        private CommentRepository         $commentRepository,
+        private EntityManagerInterface    $em,
+        private CommentItemResponseMapper $commentMapper
+    ) {}
 
     public function getComments(): CommentList
     {

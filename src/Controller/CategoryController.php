@@ -11,7 +11,7 @@ use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 
 #[Route(path: "/api/v1/categories", name: "categories")]
-class CategoryController extends AbstractController
+final class CategoryController extends AbstractController
 {
 
     public function __construct(private readonly CategoryService $categoryService)
