@@ -7,5 +7,5 @@
 5. Run command: **composer install**
 6. Run command: **docker-compose up -d** (You should run docker before)
 7. Run migrations: **symfony console doctrine:migraions:migrate**
-
+8. Run: **symfony serve**
 
