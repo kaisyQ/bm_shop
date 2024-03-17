@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Controller;
 
 use App\Dto\CommentListItem;
@@ -18,7 +18,7 @@ use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 
 #[Route(path: "api/v1/comments", name: "comments")]
-class CommentController extends AbstractController
+final class CommentController extends AbstractController
 {
 
     public function __construct(private readonly CommentService $commentService) {}

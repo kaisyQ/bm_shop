@@ -15,6 +15,7 @@
         "nelmio/cors-bundle": "^2.3",
         "php-ai/php-ml": "^0.10.0",
         "predis/predis": "^2.2",
+        "stripe/stripe-php": "^13.10",
         "symfony/cache": "6.3.*",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
@@ -26,7 +27,7 @@
         "symfony/serializer": "6.3.*",
         "symfony/twig-bundle": "6.3.*",
         "symfony/yaml": "6.3.*",
-        "vich/uploader-bundle": "^2.2",
+        "vich/uploader-bundle": "^2.2"
     },
     "config": {
         "allow-plugins": {

@@ -8,7 +8,7 @@ use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 final readonly class CacheAdapter implements CacheAdapterInterface
 {
-    private \RedisArray|\Redis|\RedisCluster|\Relay\Relay|\Predis\ClientInterface $client;
+    private \Predis\ClientInterface $client;
     public function __construct()
     {
         $this->client = RedisAdapter::createConnection(

@@ -61,6 +61,10 @@ final class ProductNormalizer implements DenormalizerInterface
         if (isset($data->attachments))
             $product->setImages(array_map(fn ($attachment) => $attachment->image, $data->attachments));
 
+        if (isset($data->status)) 
+            $product->setStatus($data->status);
+        
+
         return $product;
     }
 

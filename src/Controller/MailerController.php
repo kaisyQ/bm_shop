@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Controller;
 
 use App\Dto\ContactUsRequest;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Route(path: "/api/v1/mailer", name: "mailer_controller")]
-class MailerController extends AbstractController
+final class MailerController extends AbstractController
 {
     public function __construct(private readonly MailerService $mailerService)
     {

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Constants\Constants;
+use App\Constants\ProductStatusEnums;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -79,12 +80,21 @@ class Product
     #[Groups("product")]
     private ?int $depth = null;
 
+
+    /**
+     * @see ProductStatusEnums
+     */
+    #[ORM\Column]
+    #[Groups("product")]
+    private string $status;
+
     public function __construct()
     {
         $this->attachments = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->delivery = Constants::DELIVERY_MESSAGE;
+        $this->status = ProductStatusEnums::SALE;
     }
 
     #[ORM\PreUpdate]
@@ -300,6 +310,24 @@ class Product
     public function setDepth(int $depth): self
     {
         $this->depth = $depth;
+
+        return $this;
+    }
+
+    /**
+     * @see ProductStatusEnums
+     */
+    public function getStatus(): string 
+    {
+        return $this->status;
+    }
+
+    /**
+     * @see ProductStatusEnums
+     */
+    public function setStatus(string $status): self 
+    {
+        $this->status = $status;
 
         return $this;
     }

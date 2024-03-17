@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\MailTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MailTypeRepository::class)]
-class MailType
+final class MailType
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\Product;
 
+use App\Constants\ProductStatusEnums;
+
 interface IProductRepositoryInterface
 {
     /**
@@ -70,4 +72,12 @@ interface IProductRepositoryInterface
      *
      */
     public function getTotalProductsCount(?Category $category, ?int $priceFrom, ?int $priceTo): int;
+
+
+    /**
+     * Method returning products by ids
+     * 
+     * @param int[]
+     */
+    public function getByIds(array $ids);
 }

@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\SearchService;
@@ -12,7 +12,7 @@ use App\Dto\SearchListItem;
 
 #[Route(path: "/api/v1/search", name: "search")]
 
-class SearchController extends AbstractController
+final class SearchController extends AbstractController
 {
     public function __construct(private readonly SearchService $searchService)
     {

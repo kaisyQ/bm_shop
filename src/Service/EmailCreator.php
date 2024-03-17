@@ -18,5 +18,4 @@ final class EmailCreator
             ->text($message);
     }
 
-
 }

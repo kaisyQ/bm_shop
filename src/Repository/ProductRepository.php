@@ -6,7 +6,6 @@ use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 
@@ -109,4 +108,13 @@ class ProductRepository extends ServiceEntityRepository implements IProductRepos
 
         return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
     }
+
+    public function getByIds(array $ids) 
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p')->where('id in :ids')->setParameter('name', '('. implode(',', $ids) . ')');
+
+        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SIMPLEOBJECT);
+    }
+
 }

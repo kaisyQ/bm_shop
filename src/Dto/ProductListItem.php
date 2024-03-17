@@ -4,6 +4,7 @@
 namespace App\Dto;
 
 use DateTimeImmutable;
+use App\Constants\ProductStatusEnums;
 
 
 class ProductListItem
@@ -23,6 +24,10 @@ class ProductListItem
     private int $width;
     private int $height;
     private int $depth;
+    /**
+     * @see ProductStatusEnums
+     */
+    private string $status;
     public function getId(): int
     {
         return $this->id;
@@ -191,6 +196,18 @@ class ProductListItem
     public function setDepth(int $depth): self
     {
         $this->depth = $depth;
+        return $this;
+    }
+
+    public function getStatus(): string 
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self 
+    {
+        $this->status = $status;
+
         return $this;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Controller;
 
 use App\Dto\BestsellerListItem;
@@ -11,7 +11,7 @@ use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 
 #[Route(path: "/api/v1/bestsellers", name: "bestseller")]
-class BestsellerController extends AbstractController
+final class BestsellerController extends AbstractController
 {
     public function __construct(private readonly BestsellerService $bestsellerService)
     {
