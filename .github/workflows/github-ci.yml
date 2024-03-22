@@ -33,6 +33,9 @@ jobs:
       # —— Composer —————————————————————————————————————————————————————————
       - name: Install Composer dependencies
         run: composer install
+
+      - name: Update permissions
+        run: chmod +x bin/console
       # —— Symfony ——————————————————————————————————————————————————————————
       - name: Check the Symfony console
         run: bin/console -V
