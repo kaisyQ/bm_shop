@@ -1,9 +1,11 @@
 name: Tests
+
 on:
   push:
       branches: [master, develop, kaisyq]
     pull_request:
       branches: [master, develop, kaisyq]
+
 jobs:
   php-tests:
     runs-on: ubuntu-20.04
