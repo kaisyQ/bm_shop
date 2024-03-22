@@ -17,12 +17,15 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Domain/Entity/'
             - '../src/Kernel.php'
 
     App\ExceptionHandler:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+
+    App\Security\:
+        resource: '../src/Application/Security/*'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
