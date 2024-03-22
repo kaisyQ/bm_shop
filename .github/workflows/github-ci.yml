@@ -1,7 +1,11 @@
 name: Tests
-on: [push]
+on:
+  push:
+      branches: [master, develop, kaisyq]
+    pull_request:
+      branches: [master, develop, kaisyq]
 jobs:
-  php-unit-and-functional-tests:
+  php-tests:
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: true
@@ -25,28 +29,12 @@ jobs:
       - name: Check PHP Version
         run: php -v
       # —— Composer —————————————————————————————————————————————————————————
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - name: Cache composer dependencies
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
       - name: Install Composer dependencies
         run: composer install
       # —— Symfony ——————————————————————————————————————————————————————————
-      - name: Check Symfony requirements
-        run: vendor/bin/requirements-checker
       - name: Check the Symfony console
         run: bin/console -V
       ## —— Tests ———————————————————————————————————————————————————————————
       - name: Run functionnal and unit tests
         run: |
-          cp .env.ci .env.test
-          cp .env.ci .env
-          cp phpunit.ci.xml phpunit.xml
-          composer test
+          php bin/phpunit
