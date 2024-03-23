@@ -3,9 +3,6 @@
 
 namespace App\Presenstation\Response;
 
-
-use App\Dto\CommentListItem;
-
 final class CommentList
 {
 
