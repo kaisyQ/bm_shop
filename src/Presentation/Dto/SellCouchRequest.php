@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Dto;
+namespace App\Presenstation\Dto;
 
 
 class SellCouchRequest {

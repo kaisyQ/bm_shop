@@ -2,8 +2,8 @@
 
 namespace App\Application\Service;
 
-use App\Dto\CategoryListItem;
-use App\Dto\CategoryListResponse;
+use App\Presenstation\Dto\CategoryListItem;
+use App\Presenstation\Dto\CategoryListResponse;
 use App\Infrastructure\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;

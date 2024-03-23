@@ -13,6 +13,7 @@ final class ExceptionHandler
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
+        
         $response = new JsonResponse([
             'error_message' => $exception->getMessage()
         ], Response::HTTP_INTERNAL_SERVER_ERROR);

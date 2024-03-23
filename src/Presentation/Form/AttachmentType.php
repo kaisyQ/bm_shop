@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Presentation\Form;
 
-use App\Entity\Attachment;
+use App\Domain\Entity\Attachment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

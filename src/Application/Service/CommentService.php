@@ -3,16 +3,13 @@
 namespace App\Application\Service;
 
 use App\Constants\ExceptionCode;
-use App\Dto\CommentList;
-use App\Dto\CommentListItem;
-use App\Dto\CreateCommentRequest;
-use App\Dto\UpdateCommentRequest;
+use App\Presenstation\Dto\CommentList;
+use App\Presenstation\Dto\CommentListItem;
+use App\Presenstation\Dto\CreateCommentRequest;
+use App\Presenstation\Dto\UpdateCommentRequest;
 use App\Domain\Entity\Comment;
-use App\Exception\DatabaseException;
-use App\Exception\ValidateException;
 use App\Infrastructure\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Constants\ExceptionInfo;
 
 final readonly class CommentService
 {

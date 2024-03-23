@@ -1,7 +1,8 @@
 <?php
 
 
-namespace App\Dto;
+namespace App\Presenstation\Dto;
+
 class UpdateCommentRequest
 {
     private ?string $username = null;

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application\Service;
 
-use App\Dto\ProductListResponse;
+use App\Presenstation\Dto\ProductListResponse;
 use App\Infrastructure\Repository\ProductRepository;
-use App\Dto\ProductListItem;
+use App\Presenstation\Dto\ProductListItem;
 use App\Infrastructure\Repository\CategoryRepository;
 use App\Utils\Pager;
 use Symfony\Component\Serializer\SerializerInterface;

@@ -5,7 +5,7 @@ namespace App\Presentation\Controller\Admin;
 use App\Domain\Entity\Attachment;
 use App\Domain\Entity\Category;
 use App\Domain\Entity\Product;
-use App\Form\AttachmentType;
+use App\Presentation\Form\AttachmentType;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;

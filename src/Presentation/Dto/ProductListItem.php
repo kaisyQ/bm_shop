@@ -1,10 +1,9 @@
 <?php
 
 
-namespace App\Dto;
+namespace App\Presenstation\Dto;
 
 use DateTimeImmutable;
-use App\Constants\ProductStatusEnums;
 
 
 class ProductListItem

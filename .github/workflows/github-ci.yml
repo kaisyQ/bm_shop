@@ -43,3 +43,6 @@ jobs:
       - name: Run functionnal and unit tests
         run: |
           php bin/phpunit
+      - name: Generating OpenApi documentation
+        run:
+          composer generate-docs
