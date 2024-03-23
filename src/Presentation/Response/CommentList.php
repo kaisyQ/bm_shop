@@ -1,12 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 
-namespace App\Presenstation\Dto;
+namespace App\Presenstation\Response;
 
 
 use App\Dto\CommentListItem;
 
-class CommentList
+final class CommentList
 {
 
     /** @var CommentListItem[] */

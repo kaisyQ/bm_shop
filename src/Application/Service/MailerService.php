@@ -3,8 +3,8 @@
 
 namespace App\Application\Service;
 
-use App\Presenstation\Dto\ContactUsRequest;
-use App\Presenstation\Dto\SellCouchRequest;
+use App\Presenstation\Request\ContactUsRequest;
+use App\Presenstation\Request\SellCouchRequest;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;

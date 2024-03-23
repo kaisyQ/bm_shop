@@ -4,7 +4,7 @@
 namespace App\Presentation\Docs;
 
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
-use App\Presenstation\Dto\ContactUsRequest;
+use App\Presenstation\Request\ContactUsRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

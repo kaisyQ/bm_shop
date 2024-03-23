@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
+namespace App\Presenstation\Request;
 
-namespace App\Presenstation\Dto;
-
-class UpdateCommentRequest
+final class UpdateCommentRequest
 {
     private ?string $username = null;
     private ?string $text = null;

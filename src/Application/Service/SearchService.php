@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Application\Service;
 
-use App\Presenstation\Dto\SearchListItem;
-use App\Presenstation\Dto\SearchListResponse;
+use App\Presenstation\Response\SearchListItem;
+use App\Presenstation\Response\SearchListResponse;
 use App\Infrastructure\Repository\ProductRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 

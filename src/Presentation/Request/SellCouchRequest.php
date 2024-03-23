@@ -1,10 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
+namespace App\Presenstation\Request;
 
-namespace App\Presenstation\Dto;
-
-
-class SellCouchRequest {
+final class SellCouchRequest {
     private string $name;
     private string $email;
     private string $phone;

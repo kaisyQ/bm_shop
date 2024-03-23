@@ -1,12 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Application\Service;
 
-use App\Constants\ExceptionCode;
-use App\Presenstation\Dto\CommentList;
-use App\Presenstation\Dto\CommentListItem;
-use App\Presenstation\Dto\CreateCommentRequest;
-use App\Presenstation\Dto\UpdateCommentRequest;
+use App\Presenstation\Response\CommentListItem;
+use App\Presenstation\Request\CreateCommentRequest;
+use App\Presenstation\Request\UpdateCommentRequest;
 use App\Domain\Entity\Comment;
 use App\Infrastructure\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;

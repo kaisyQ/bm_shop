@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Presenstation\Dto;
+namespace App\Presenstation\Response;
 
-class BestsellerListItem
+final class BestsellerListItem
 {
     private int $id;
     private string $name;

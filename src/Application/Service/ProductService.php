@@ -1,12 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Application\Service;
 
-use App\Presenstation\Dto\ProductListResponse;
+use App\Presenstation\Response\ProductListResponse;
 use App\Infrastructure\Repository\ProductRepository;
-use App\Presenstation\Dto\ProductListItem;
+use App\Presenstation\Response\ProductListItem;
 use App\Infrastructure\Repository\CategoryRepository;
 use App\Utils\Pager;
 use Symfony\Component\Serializer\SerializerInterface;

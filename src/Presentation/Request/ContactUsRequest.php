@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Presenstation\Dto;
+namespace App\Presenstation\Request;
 
 
-class ContactUsRequest
+final class ContactUsRequest
 {
     private string $name;
     private string $email;

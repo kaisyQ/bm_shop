@@ -1,18 +1,16 @@
-<?php
+<?php declare(strict_types=1);
 
+namespace App\Presenstation\Response;
 
-namespace App\Presenstation\Dto;
-
-class BestsellerListResponse
+final class SearchListResponse
 {
     /**
-     * @var BestsellerListItem[]
+     * @var SearchListItem[]
      */
     private array $items;
 
     /**
-     * 
-     * @param BestsellerListItem[] $items 
+     * @param SearchListItem[] $items
      */
     public function __construct(array $items)
     {
@@ -20,18 +18,16 @@ class BestsellerListResponse
     }
 
     /**
-     * 
-     * @return BestsellerListItem[]
+     * @return SearchListItem[] $items
      */
+
     public function getItems(): array
     {
         return $this->items;
     }
 
     /**
-     * 
-     * @param BestsellerListItem[] $items 
-     * @return self
+     * @param SearchListItem[] $items
      */
     public function setItems(array $items): self
     {

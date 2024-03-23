@@ -3,8 +3,8 @@
 
 namespace App\Application\Service;
 
-use App\Presenstation\Dto\BestsellerListItem;
-use App\Presenstation\Dto\BestsellerListResponse;
+use App\Presenstation\Response\BestsellerListItem;
+use App\Presenstation\Response\BestsellerListResponse;
 use App\Infrastructure\Repository\ProductRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 

@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Presenstation\Dto;
+namespace App\Presenstation\Response;
 
 use DateTimeImmutable;
 
-class CommentListItem {
+final class CommentListItem {
     private int $id;
     private string $username;
     private string $text;

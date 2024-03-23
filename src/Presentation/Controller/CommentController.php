@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Presentation\Controller;
 
-use App\Presenstation\Dto\CreateCommentRequest;
-use App\Presenstation\Dto\UpdateCommentRequest;
+use App\Presenstation\Request\CreateCommentRequest;
+use App\Presenstation\Request\UpdateCommentRequest;
 use App\Application\Service\CommentService;
 use App\Presentation\Docs\CommentControllerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

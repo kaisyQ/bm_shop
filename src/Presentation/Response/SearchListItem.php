@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Presenstation\Dto;
+namespace App\Presenstation\Response;
 
-
-class SearchListItem
+final class SearchListItem
 {
     private int $id;
     private string $name;

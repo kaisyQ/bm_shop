@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace App\Presenstation\Dto;
+namespace App\Presenstation\Response;
 
 
-class CategoryListItem
+final class CategoryListItem
 {
     private int $id;
     private string $name;

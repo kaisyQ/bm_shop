@@ -1,12 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 
-namespace App\Presenstation\Dto;
+namespace App\Presenstation\Response;
 
 use DateTimeImmutable;
 
 
-class ProductListItem
+final class ProductListItem
 {
     private int $id;
     private string $name;
