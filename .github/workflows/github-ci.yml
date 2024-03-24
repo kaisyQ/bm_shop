@@ -53,7 +53,7 @@ jobs:
       # Environment
 
       - name: Export db connection string
-        run: export DATABASE_URL="postgresql://root:12345@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
+        run: export DATABASE_URL="postgresql://root:12345@localhost:5432/app?serverVersion=15&charset=utf8"
 
       - name: Export cache connection string
         run: export REDIS_DSN="redis://localhost:6379"
