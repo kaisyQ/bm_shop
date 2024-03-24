@@ -19,6 +19,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-root}
     volumes:
       - database_data:/var/lib/postgresql/data:rw
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
