@@ -56,8 +56,8 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
-    "jane-php/automapper-bundle": {
-        "version": "v7.5.3"
+    "jolicode/automapper-bundle": {
+        "version": "8.1.0"
     },
     "nelmio/cors-bundle": {
         "version": "2.3",

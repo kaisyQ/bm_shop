@@ -1,6 +1,6 @@
-<?php
-declare(strict_types=1);
-namespace App\DataFixtures;
+<?php declare(strict_types=1);
+
+namespace App\Infrastructure\DataFixtures;
 
 use App\Domain\Entity\Admin;
 use Doctrine\Bundle\FixturesBundle\Fixture;

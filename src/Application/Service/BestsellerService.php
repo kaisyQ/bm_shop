@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Application\Service;
@@ -13,15 +13,14 @@ final class BestsellerService
     public function __construct(
         private ProductRepository $productRepository,
         private SerializerInterface $serializer,
-    ) {
-    }
+    ) {}
 
     public function getBestsellers(): BestsellerListResponse
     {
         $products = $this->productRepository->findBy(['bestseller' => true]);
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
 
-        return new BestsellerListResponse(
+        return new BestsellerListResponse (
             array_map(
                 fn ($product) =>
                 new BestsellerListItem(

@@ -26,6 +26,8 @@ services:
 
     App\Security\:
         resource: '../src/Application/Security/*'
-
+    # doctrine fixtures
+    App\Infrastructure\DataFixtures\:
+        resource: '../src/Infrastructure/DataFixtures'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

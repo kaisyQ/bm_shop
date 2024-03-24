@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Entity\Log;
+use App\Domain\Entity\Log;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

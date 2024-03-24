@@ -13,7 +13,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
         "easycorp/easyadmin-bundle": "^4",
-        "jane-php/automapper-bundle": "^7.5",
+        "jolicode/automapper-bundle": "^8.1",
         "nelmio/cors-bundle": "^2.3",
         "predis/predis": "^2.2",
         "stripe/stripe-php": "^13.10",
@@ -29,6 +29,7 @@
         "symfony/twig-bundle": "6.3.*",
         "symfony/yaml": "6.3.*",
         "vich/uploader-bundle": "^2.2",
+        "widmogrod/php-functional": "^6.0",
         "zircote/swagger-php": "^4.8"
     },
     "config": {
@@ -46,7 +47,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/",
+            "App\\Infrastructure\\DataFixtures\\": "src/Infrastructure/DataFixtures/"
         }
     },
     "replace": {

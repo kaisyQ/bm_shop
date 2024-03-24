@@ -39,6 +39,15 @@ jobs:
       # —— Symfony ——————————————————————————————————————————————————————————
       - name: Check the Symfony console
         run: bin/console -V
+      # Install Docker
+      - name: Installing docker
+        run: sudo systemctl start docker
+      # Docker
+      - name: Create database and cache
+        run: docker-compose up -d --build
+      # Doctrine
+      - name: Load doctrine fixtures
+        run: php bin/console doctrine:fixtures:load
       ## —— Tests ———————————————————————————————————————————————————————————
       - name: Run functionnal and unit tests
         run: |

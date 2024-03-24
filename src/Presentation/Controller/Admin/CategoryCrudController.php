@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Controller\Admin;
 
-use App\Entity\Category;
+use App\Domain\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
 use App\Infrastructure\Repository\LogRepository;
 use Doctrine\ORM\Mapping as ORM;
