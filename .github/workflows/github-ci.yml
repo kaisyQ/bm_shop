@@ -45,11 +45,16 @@ jobs:
       # Docker
       - name: Create database and cache
         run: docker-compose up -d --build
+      # Environment
       - name: Export db connection string
         run: export DATABASE_URL="postgresql://root:12345@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
       - name: Export cache connection string
         run: export REDIS_DSN="redis://localhost:6379"
       # Doctrine
+      - name: Create database using Doctrine
+        run: php bin/console doctrine:database:create
+      - name: Run migrations using Doctrine
+        run: php bin/console doctrine:migrations:migrate
       - name: Load doctrine fixtures
         run: php bin/console doctrine:fixtures:load
       ## —— Tests ———————————————————————————————————————————————————————————
