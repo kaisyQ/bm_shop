@@ -25,7 +25,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           coverage: none
           tools: composer:v2
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo, pdo_pgsql, openssl
         env:
           update: true
       - name: Check PHP Version
@@ -37,30 +37,43 @@ jobs:
       - name: Update permissions
         run: chmod +x bin/console
       # —— Symfony ——————————————————————————————————————————————————————————
+
       - name: Check the Symfony console
         run: bin/console -V
       # Install Docker
+
       - name: Installing docker
         run: sudo systemctl start docker
+
       # Docker
+
       - name: Create database and cache
         run: docker-compose up -d --build
+      
       # Environment
+
       - name: Export db connection string
         run: export DATABASE_URL="postgresql://root:12345@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
+
       - name: Export cache connection string
         run: export REDIS_DSN="redis://localhost:6379"
+
       # Doctrine
+
       - name: Create database using Doctrine
         run: php bin/console doctrine:database:create
+
       - name: Run migrations using Doctrine
         run: php bin/console doctrine:migrations:migrate
+
       - name: Load doctrine fixtures
         run: php bin/console doctrine:fixtures:load
+
       ## —— Tests ———————————————————————————————————————————————————————————
       - name: Run functionnal and unit tests
         run: |
           php bin/phpunit
+
       - name: Generating OpenApi documentation
         run:
           composer generate-docs
