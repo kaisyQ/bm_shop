@@ -32,10 +32,6 @@ class Attachment
     #[ORM\Column(type: "datetime")]
     private $updatedAt;
 
-    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: "attachments")]
-    #[Groups(["attachment"])]
-    private $product;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -79,18 +75,6 @@ class Attachment
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
-
-    public function setProduct(?Product $product): self
-    {
-        $this->product = $product;
 
         return $this;
     }

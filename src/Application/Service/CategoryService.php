@@ -22,6 +22,8 @@ final class CategoryService
 
         $serializedProducts = $this->serializer->serialize($categories, 'json', ['groups' => ['category']]);
 
+
+        // return $serializedProducts;
         return new CategoryListResponse(
             array_map(
                 fn ($category) => new CategoryListItem($category->id, $category->name, $category->slug),
