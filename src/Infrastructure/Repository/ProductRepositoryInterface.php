@@ -75,8 +75,7 @@ interface ProductRepositoryInterface
 
     /**
      * Method returning products by ids
-     * 
-     * @param int[]
+     * @return Product[]
      */
-    public function getByIds(array $ids);
+    public function getByIds(array $ids): array;
 }

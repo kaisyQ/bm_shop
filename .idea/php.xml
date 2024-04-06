@@ -139,6 +139,10 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
       <path value="$PROJECT_DIR$/vendor/predis/predis" />
       <path value="$PROJECT_DIR$/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/vendor/widmogrod/php-functional" />
+      <path value="$PROJECT_DIR$/vendor/functional-php/fantasy-land" />
+      <path value="$PROJECT_DIR$/vendor/jolicode/automapper-bundle" />
+      <path value="$PROJECT_DIR$/vendor/jolicode/automapper" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />

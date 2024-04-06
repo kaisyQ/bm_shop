@@ -132,23 +132,5 @@ interface MailerControllerInterface {
      * )
      */
 
-    public function sell(Request $request): JsonResponse;
+   public function sell(Request $request): JsonResponse;
 }
-
-
-
-/**
-schema: new OA\Schema(properties: [
-    //                 new OA\Property(
-    //                     property: 'uploaded_images[]',
-    //                     type: 'array',
-    //                     items: new OA\Items(type: 'file')
-    //                 ),
-    //                 new OA\Property(
-    //                     property: 'body',
-    //                     ref: new Model(type: SellCouchRequest::class),
-    //                     type: 'json',
-
-    //                 )
-    //             ])
- */

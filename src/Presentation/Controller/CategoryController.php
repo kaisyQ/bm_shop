@@ -19,7 +19,8 @@ final class CategoryController extends AbstractController implements CategoryCon
     #[Route(path: "/", name: "categories_index", methods: ['GET'])]
     public function index(): JsonResponse
     {
-        return $this->json($this->categoryService->getCategories());
+        $result = $this->categoryService->getCategories();
+        return $this->json($result);
     }
 
 

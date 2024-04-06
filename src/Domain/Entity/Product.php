@@ -2,6 +2,8 @@
 
 namespace App\Domain\Entity;
 
+use App\Application\Constants\Constants;
+use App\Application\Enums\ProductStatusEnums;
 use App\Infrastructure\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,7 +11,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use App\Constants\Constants;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -59,7 +60,7 @@ class Product
     #[Groups("product")]
     private ?int $count = null;
 
-    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: "product", cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(mappedBy: "product", targetEntity: Attachment::class, cascade: ["persist", "remove"])]
     #[Groups(["product", "search"])]
     private Collection $attachments;
 
@@ -80,9 +81,6 @@ class Product
     private ?int $depth = null;
 
 
-    /**
-     * @see ProductStatusEnums
-     */
     #[ORM\Column]
     #[Groups("product")]
     private string $status;
@@ -94,8 +92,11 @@ class Product
         $this->updatedAt = new \DateTimeImmutable();
         $this->delivery = Constants::DELIVERY_MESSAGE;
 
-        // TODO Сделать нормальный Enums
-        $this->status = 'sale';
+
+        /**
+         * @see ProductStatusEnums
+         */
+        $this->status = 1;
     }
 
     #[ORM\PreUpdate]
@@ -315,18 +316,12 @@ class Product
         return $this;
     }
 
-    /**
-     * @see ProductStatusEnums
-     */
-    public function getStatus(): string 
+    public function getStatus(): int
     {
         return $this->status;
     }
 
-    /**
-     * @see ProductStatusEnums
-     */
-    public function setStatus(string $status): self 
+    public function setStatus(int $status): self
     {
         $this->status = $status;
 

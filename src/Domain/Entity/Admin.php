@@ -4,6 +4,7 @@ namespace App\Domain\Entity;
 
 use App\Infrastructure\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\Expr\Func;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -20,6 +21,12 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private array $roles = [];
+
+    #[ORM\Column]
+    private ?string $email = null;
+
+    #[ORM\Column]
+    private bool $pending;
 
     /**
      * @var string The hashed password
@@ -95,5 +102,28 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getEmail(): ?string 
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email = null): self 
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPending(): bool {
+        return $this->pending;
+    }
+
+    public function setPending(bool $pending): self 
+    {
+        $this->pending = $pending;
+
+        return $this;
     }
 }

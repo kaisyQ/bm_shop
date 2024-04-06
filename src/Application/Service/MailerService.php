@@ -10,11 +10,11 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 
 
-final class MailerService
+final readonly class MailerService
 {
     public function __construct(
-        private readonly EmailCreator $emailCreator,
-        private readonly MailHistoryService $mailHistoryService
+        private EmailCreator       $emailCreator,
+        private MailHistoryService $mailHistoryService
     ){}
 
     public function sendContactMessage(ContactUsRequest $request): void

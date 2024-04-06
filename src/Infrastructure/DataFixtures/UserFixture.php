@@ -19,6 +19,7 @@ class UserFixture extends Fixture
         $user->setUsername("admin");
         $user->setRoles(["ROLE_ADMIN"]);
         $user->setPassword($password);
+        $user->setPending(false);
         $manager->persist($user);
         $manager->flush();
     }

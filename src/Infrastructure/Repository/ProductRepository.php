@@ -109,10 +109,12 @@ class ProductRepository extends ServiceEntityRepository implements ProductReposi
         return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
     }
 
-    public function getByIds(array $ids) 
+    public function getByIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('p')
-            ->select('p')->where('id in :ids')->setParameter('name', '('. implode(',', $ids) . ')');
+            ->select('p')
+            ->where('id in :ids')
+            ->setParameter('name', '('. implode(',', $ids) . ')');
 
         return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_SIMPLEOBJECT);
     }

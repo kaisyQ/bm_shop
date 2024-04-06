@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Domain\EntityListener;
 
 use App\Domain\Entity\Product;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
@@ -15,6 +14,7 @@ class ProductEntityListener {
         private readonly SluggerInterface $slugger,
     ) {}
 
+    // @TODO Поменять с deprecated на актуальные типы 
     public function prePersist(Product $category, \Doctrine\ORM\Event\LifecycleEventArgs $lifecycleEventArgs): void
     {
         $category->computeSlug($this->slugger);
