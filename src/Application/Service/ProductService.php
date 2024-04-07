@@ -2,11 +2,11 @@
 
 namespace App\Application\Service;
 
-use App\Presenstation\Response\ProductListResponse;
+use App\Application\Utils\Pager;
+use App\Infrastructure\Repository\CategoryRepository;
 use App\Infrastructure\Repository\ProductRepository;
 use App\Presenstation\Response\ProductListItem;
-use App\Infrastructure\Repository\CategoryRepository;
-use App\Utils\Pager;
+use App\Presenstation\Response\ProductListResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 
 final class ProductService
