@@ -3,10 +3,11 @@
 namespace App\Presentation\Controller;
 
 use App\Application\UseCase\RegisterUseCase;
-use App\Presenstation\Request\RegisterRequest;
+use App\Presentation\Request\RegisterRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AuthController extends AbstractController 
 {
     public function __construct(
-        private readonly RegisterUseCase $registerUseCase
+        private readonly RegisterUseCase    $registerUseCase
     ){}
 
     #[Route(path: '/login', name: 'auth_login', methods: ['POST'])]
@@ -27,6 +28,9 @@ final class AuthController extends AbstractController
 
     }
 
+    /**
+     * @throws \Exception
+     */
     #[Route(path: '/register', name: 'auth_register', methods: ['POST'])]
     public function register(Request $request): JsonResponse
     {
@@ -37,10 +41,9 @@ final class AuthController extends AbstractController
             $payload->get('password'),
             $payload->get('username')
         );
-        
+
         $this->registerUseCase->execute($data);
-        
-        return $this->json([$data]);
+        return $this->json([]);
     }
 
     #[Route(path: '/check_me', name: 'auth_check_me', methods: ['GET'])]

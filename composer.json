@@ -16,6 +16,7 @@
         "jolicode/automapper-bundle": "^8.1",
         "nelmio/cors-bundle": "^2.3",
         "predis/predis": "^2.2",
+        "snc/redis-bundle": "^4.7",
         "stripe/stripe-php": "^13.10",
         "symfony/cache": "6.3.*",
         "symfony/console": "6.3.*",
