@@ -55,7 +55,7 @@ final class RegisterUseCase
 
         $code = (new Code())
             ->setCustomerId($customer->getId())
-            ->setCode($this->generateCode())
+            ->setCode(strtolower($this->generateCode()))
             ->setExpiresAt($now->add(new \DateInterval('PT1H')));
 
 

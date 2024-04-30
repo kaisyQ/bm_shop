@@ -4,6 +4,7 @@ namespace App\Infrastructure\Repository;
 
 use App\Domain\Entity\Code;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,5 +20,19 @@ class CodeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Code::class);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findActualByCustomerIdAndCode(int $customerId, string $code): ?Code
+    {
+        $qb = $this->createQueryBuilder('c')->select('c')
+            ->where('c.code = :code')->setParameter('code', $code)
+            ->andWhere('c.customerId = :customerId')->setParameter('customerId', $customerId)
+            ->andWhere('c.expiresAt > current_timestamp()')
+            ->andWhere('c.deletedAt is null');
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }
