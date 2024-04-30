@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Request;
 
-final class PaymentRequestDto 
+final class PaymentRequest
 {
 
     /**

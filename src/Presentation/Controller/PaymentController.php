@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presentation\Controller;
 
-use App\Presentation\Request\PaymentRequestDto;
+use App\Presentation\Request\PaymentRequest;
 use App\Application\UseCase\Interface\PaymentUseCaseInterface;
 use App\Application\UseCase\PaymentUseCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +23,7 @@ final class PaymentController extends AbstractController
     }
 
     #[Route(path: '/', name: 'payment_index', methods: ['POST'])]
-    public function index(#[MapRequestPayload] PaymentRequestDto $request): Response
+    public function index(#[MapRequestPayload] PaymentRequest $request): Response
     {
 
         try {
