@@ -2,9 +2,9 @@
 
 namespace App\Application\Service;
 
-use App\Presenstation\Response\CommentListItem;
-use App\Presenstation\Request\CreateCommentRequest;
-use App\Presenstation\Request\UpdateCommentRequest;
+use App\Presentation\Response\CommentListItem;
+use App\Presentation\Request\CreateCommentRequest;
+use App\Presentation\Request\UpdateCommentRequest;
 use App\Domain\Entity\Comment;
 use App\Infrastructure\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;

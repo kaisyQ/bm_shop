@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Presenstation\Response;
+namespace App\Presentation\Response;
 
 use DateTimeImmutable;
 

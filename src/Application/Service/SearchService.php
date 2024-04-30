@@ -2,8 +2,8 @@
 
 namespace App\Application\Service;
 
-use App\Presenstation\Response\SearchListItem;
-use App\Presenstation\Response\SearchListResponse;
+use App\Presentation\Response\SearchListItem;
+use App\Presentation\Response\SearchListResponse;
 use App\Infrastructure\Repository\ProductRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
