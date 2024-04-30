@@ -21,6 +21,7 @@ final class BestsellerController extends AbstractController implements Bestselle
     #[Route(path: "/", name: "bestseller_index", methods: ["GET"])]
     public function index() : JsonResponse
     {
+        return $this->json([]);
         return $this->json($this->bestsellerService->getBestsellers());
     }
 }
