@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Infrastructure/DataFixtures" isTestSource="true" packagePrefix="App\Infrastructure\DataFixtures\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
@@ -131,6 +132,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/zircote/swagger-php" />
       <excludeFolder url="file://$MODULE_DIR$/public/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/var" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/predis/predis" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/stripe/stripe-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/functional-php/fantasy-land" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jolicode/automapper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jolicode/automapper-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/widmogrod/php-functional" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/snc/redis-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

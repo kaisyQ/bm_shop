@@ -137,9 +137,16 @@
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
       <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/vendor/widmogrod/php-functional" />
+      <path value="$PROJECT_DIR$/vendor/functional-php/fantasy-land" />
+      <path value="$PROJECT_DIR$/vendor/jolicode/automapper-bundle" />
+      <path value="$PROJECT_DIR$/vendor/jolicode/automapper" />
+      <path value="$PROJECT_DIR$/vendor/snc/redis-bundle" />
+      <path value="$PROJECT_DIR$/vendor/predis/predis" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>

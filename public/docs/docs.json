@@ -1,0 +1,527 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Rest API server for bmfurniture",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/v1/bestsellers/": {
+            "get": {
+                "tags": [
+                    "Bestsellers"
+                ],
+                "summary": "Get all bestsellers",
+                "description": "Method returns all bestsellers",
+                "operationId": "7139f3481e9d6aadd027b3bdd2412deb",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BestsellerDetail"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/categories/": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories",
+                "description": "Method returns all categories",
+                "operationId": "979dc8aead5fd20db1e25d9c67f32fec",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CategoryDetail"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/categories/{id}": {
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Remove category by ID",
+                "description": "Remove category by ID",
+                "operationId": "7fcad4fa39db07bbbc1b1c0957b1371d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Category was succesfully deleted!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/comments/": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get all comments",
+                "description": "Returns all comments",
+                "operationId": "d925d67504c09735af83515e926abea5",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CommentDetail"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/comments/{id}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get one by ID",
+                "description": "Method returns one comment by its ID",
+                "operationId": "9211bb0102ef4f82f0c8ebd30be230b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CommentDetail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/comments/create": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create comment",
+                "description": "Create comment using request body params",
+                "operationId": "5dc25bc6c02e8f6c2c5d8cc065af5bd9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "Megan from Scarborough"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Everything was great and they even carried the couch up my stairs for me. Love it."
+                                    },
+                                    "stars": {
+                                        "type": "integer",
+                                        "example": "5"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CommentDetail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/comments/update": {
+            "put": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Update comment",
+                "description": "Update comment using request body params",
+                "operationId": "599644804bec05898d4ed6ea06170d6a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "Megan from Scarborough",
+                                        "nullable": true
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Everything was great and they even carried the couch up my stairs for me. Love it.",
+                                        "nullable": true
+                                    },
+                                    "stars": {
+                                        "type": "integer",
+                                        "example": "5",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CommentDetail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/comments/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Delete comment",
+                "description": "Delete comment using ID from query params. Returns removed comment ID",
+                "operationId": "62e38bf2590f224e07e3a76506c06594",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/mailer/contact_us": {
+            "post": {
+                "tags": [
+                    "Mails"
+                ],
+                "summary": "Send contact email",
+                "description": "Send email to bmfurniture.ca default receiver",
+                "operationId": "faed41499c098bf13470c454f88b0847",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mikahail"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "bmfurniture.ca@gmail.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "89243230101"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "We want to buy your couch"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "send": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/mailer/sell": {
+            "post": {
+                "tags": [
+                    "Mails"
+                ],
+                "summary": "Send sell couch mail",
+                "description": "Send sell couch email to bmfurniture.ca default receiver",
+                "operationId": "7df7feca33285ae1bd5014884285ea8f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "send": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BestsellerDetail": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Example Couch"
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "example_couch"
+                    },
+                    "price": {
+                        "type": "integer",
+                        "example": "1200"
+                    },
+                    "discountPrice": {
+                        "type": "integer",
+                        "example": "1000"
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryDetail": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Couch"
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "couch"
+                    }
+                },
+                "type": "object"
+            },
+            "CommentDetail": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "Megan from Scarborough"
+                    },
+                    "text": {
+                        "type": "string",
+                        "example": "Everything was great and they even carried the couch up my stairs for me. Love it."
+                    },
+                    "stars": {
+                        "type": "integer",
+                        "example": "5"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "09.03.2024"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
