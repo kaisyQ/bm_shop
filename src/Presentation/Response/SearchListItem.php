@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Presestation\Response;
+namespace App\Presentation\Response;
 
 final class SearchListItem
 {
