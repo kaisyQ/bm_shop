@@ -20,7 +20,7 @@ final class BestsellerService
         $products = $this->productRepository->findBy(['bestseller' => true]);
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
 
-        $deserializedProducts = $this->serializer->deserialize($serializedProducts, 'App\Domain\Product[]', 'json', ['groups' => ['product']]);
+        $deserializedProducts = $this->serializer->deserialize($serializedProducts, 'App\Domain\Entity\Product[]', 'json', ['groups' => ['product']]);
         return new BestsellerListResponse (
             array_map(
                 fn ($product) =>
