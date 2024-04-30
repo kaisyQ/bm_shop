@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Presenstation\Request;
+namespace App\Presentation\Request;
 
 final class PaymentRequestDto 
 {

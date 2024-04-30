@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presentation\Controller;
 
-use App\Presenstation\Request\PaymentRequestDto;
+use App\Presentation\Request\PaymentRequestDto;
 use App\Application\UseCase\Interface\PaymentUseCaseInterface;
 use App\Application\UseCase\PaymentUseCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
