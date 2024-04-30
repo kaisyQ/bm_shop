@@ -6,9 +6,9 @@ namespace App\Presentation\Docs;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use OpenApi\Annotations as OA;
-use App\Presenstation\Request\CreateCommentRequest;
+use App\Presentation\Request\CreateCommentRequest;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
-use App\Presenstation\Request\UpdateCommentRequest;
+use App\Presentation\Request\UpdateCommentRequest;
 
 interface CommentControllerInterface {
     
