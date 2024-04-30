@@ -130,4 +130,5 @@ final class AuthController extends AbstractController
             $request->cookies->get('session')
         ));
     }
+
 }
