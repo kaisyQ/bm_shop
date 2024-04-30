@@ -3,6 +3,7 @@
 namespace App\Application\UseCase;
 
 use App\Application\UseCase\Interface\ConfirmRegistrationUseCaseInterface;
+use App\Application\Utils\PasswordGenerator;
 use App\Domain\Entity\Customer;
 use App\Infrastructure\Repository\CodeRepository;
 use App\Infrastructure\Repository\CustomerRepository;
@@ -11,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class ConfirmRegistrationUseCase implements ConfirmRegistrationUseCaseInterface
 {
+    use PasswordGenerator;
     private EntityManagerInterface $em;
     private CustomerRepository $customerRepository;
     private CodeRepository $codeRepository;
@@ -32,7 +34,7 @@ final class ConfirmRegistrationUseCase implements ConfirmRegistrationUseCaseInte
         $customer = $this->customerRepository->findOneBy([
             'name' => $data->username,
             'email' => $data->email,
-            'password' => (hash_hmac('sha256', $data->password, 'bababa'))
+            'password' => $this->generatePassword($data->password)
         ]);
 
         if ($customer === null) {

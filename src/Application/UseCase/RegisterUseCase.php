@@ -5,6 +5,7 @@ namespace App\Application\UseCase;
 use App\Application\Model\EmailDataModel;
 use App\Application\UseCase\Interface\SendEmailUseCaseInterface;
 use App\Application\Utils\CodeGenerator;
+use App\Application\Utils\PasswordGenerator;
 use App\Domain\Entity\Code;
 use App\Domain\Entity\Customer;
 use App\Infrastructure\Repository\CustomerRepository;
@@ -15,6 +16,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 final class RegisterUseCase
 {
     use CodeGenerator;
+    use PasswordGenerator;
     private SendEmailUseCaseInterface $sendEmailUseCase;
     private CustomerRepository $customerRepository;
     private EntityManagerInterface $em;
@@ -47,7 +49,7 @@ final class RegisterUseCase
         $customer = (new Customer())
             ->setDeletedAt(new \DateTimeImmutable())
             ->setName($data->username)
-            ->setPassword(hash_hmac('sha256', $data->password, 'bababa'))
+            ->setPassword($this->generatePassword($data->password))
             ->setEmail($data->email)
             ->setPending(true);
 
