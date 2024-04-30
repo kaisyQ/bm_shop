@@ -4,7 +4,7 @@
 namespace App\Application\Service;
 
 use App\Presentation\Request\ContactUsRequest;
-use App\Presenstation\Request\SellCouchRequest;
+use App\Presentation\Request\SellCouchRequest;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;

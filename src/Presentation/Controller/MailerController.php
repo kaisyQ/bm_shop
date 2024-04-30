@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Presentation\Controller;
 
 use App\Presentation\Request\ContactUsRequest;
-use App\Presenstation\Request\SellCouchRequest;
+use App\Presentation\Request\SellCouchRequest;
 use App\Application\Service\MailerService;
 use App\Presentation\Docs\MailerControllerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
