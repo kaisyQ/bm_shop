@@ -26,8 +26,7 @@ final class Version20240310034217 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_5126AC481FF10DFC ON mail (mail_type_id)');
         $this->addSql('CREATE TABLE mail_type (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE mail ADD CONSTRAINT FK_5126AC481FF10DFC FOREIGN KEY (mail_type_id) REFERENCES mail (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE product ADD status INT NOT NULL');
-        $this->addSql("UPDATE product SET status = 1 ");
+        $this->addSql('ALTER TABLE product ADD status INT NOT NULL default 1');
     }
 
     public function down(Schema $schema): void
