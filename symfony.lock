@@ -56,18 +56,8 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
-    "nelmio/api-doc-bundle": {
-        "version": "4.12",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "3.0",
-            "ref": "c8e0c38e1a280ab9e37587a8fa32b251d5bc1c94"
-        },
-        "files": [
-            "./config/packages/nelmio_api_doc.yaml",
-            "./config/routes/nelmio_api_doc.yaml"
-        ]
+    "jolicode/automapper-bundle": {
+        "version": "8.1.0"
     },
     "nelmio/cors-bundle": {
         "version": "2.3",
@@ -93,6 +83,18 @@
             "./.env.test",
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
+        ]
+    },
+    "snc/redis-bundle": {
+        "version": "4.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "36b3d9ab65be62de4e085a25e6ca899efa96b1f3"
+        },
+        "files": [
+            "./config/packages/snc_redis.yaml"
         ]
     },
     "symfony/console": {

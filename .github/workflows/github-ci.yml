@@ -1,0 +1,79 @@
+name: Tests
+
+on:
+  push:
+    branches: [master, develop, kaisyq]
+  pull_request:
+    branches: [master, develop, kaisyq]
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: true
+      matrix:
+        php-versions: ['8.3.2']
+    steps:
+      # —— Setup Github actions —————————————————————————————————————————————
+      # https://github.com/actions/checkout (official)
+      - name: Git checkout placeholder-service
+        uses: actions/checkout@v2
+      # https://github.com/shivammathur/setup-php (community)
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo, pdo_pgsql, openssl
+        env:
+          update: true
+      - name: Check PHP Version
+        run: php -v
+      # —— Composer —————————————————————————————————————————————————————————
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Update permissions
+        run: chmod +x bin/console
+      # —— Symfony ——————————————————————————————————————————————————————————
+
+      - name: Check the Symfony console
+        run: bin/console -V
+      # Install Docker
+
+      - name: Installing docker
+        run: sudo systemctl start docker
+
+      # Docker
+
+      - name: Create database and cache
+        run: docker-compose up -d --build
+      
+      # Environment
+
+      - name: Export db connection string
+        run: export DATABASE_URL="postgresql://root:12345@localhost:5432/app?serverVersion=15&charset=utf8"
+
+      - name: Export cache connection string
+        run: export REDIS_DSN="redis://localhost:6379"
+
+      # Doctrine
+#
+#      - name: Create database using Doctrine
+#        run: php bin/console doctrine:database:create
+#
+#      - name: Run migrations using Doctrine
+#        run: php bin/console doctrine:migrations:migrate
+#
+#      - name: Load doctrine fixtures
+#        run: php bin/console doctrine:fixtures:load
+
+      ## —— Tests ———————————————————————————————————————————————————————————
+      - name: Run functional and unit tests
+        run: |
+          php bin/phpunit
+
+      - name: Generating OpenApi documentation
+        run:
+          composer generate-docs

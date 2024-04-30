@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-  mailer: 
-    image: schickling/mailcatcher
-    ports: [1025, 1080]  
-###> doctrine/doctrine-bundle ###
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
   database:
     image: postgres:${POSTGRES_VERSION:-15}-alpine
     environment:
@@ -14,6 +15,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-root}
     volumes:
       - database_data:/var/lib/postgresql/data:rw
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
