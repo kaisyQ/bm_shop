@@ -38,23 +38,23 @@ final class Version20240421091332 extends AbstractMigration
                          \">
                         Finish your registration
                     </h3>
-                        <div style=\"margin: 30px 40px; padding-bottom: 30px\">
+                        <div style=\"margin: 30px 40px; padding-bottom: 30px; color: #FFF;\">
                             <section style=\"font-size: 18px; color: #FFF;\">
-                                <p>
+                                <p style=\"color: #FFF;\">
     Welcome to BM Furniture! We were thrilled to have you join our community. To complete your registration, please use the following confirmation code:
                                 </p>
-                                <p>
-                                    <strong>Confirmation Code:<strong> [Your Confirmation Code]
+                                <p style=\"color: #FFF;\">
+                                    <strong>Confirmation Code:<strong> <span style=\"text-decoration: underline; text-transform: uppercase;\">{{code}}</span>
                                 </p>
                                 <p>
     This code is valid for 24 hours. Please enter it in the confirmation section.
-                                <p>
+                                <p style=\"color: #FFF;\">
                                     If you have not registered for BM Furniture, please ignore this email.
                                 </p>
                                 <p>
-    Thank you for choosing <span style=\"font-style: italic\">BM Furniture!</span>
+    Thank you for choosing <span style=\"font-style: italic; color: #FFF;\">BM Furniture!</span>
                                 </p>
-                                <p style=\"text-align: right;\">
+                                <p style=\"text-align: right; color: #FFF;\">
         Best regards, <span style=\"font-style: italic\">BM Furniture</span>
                                 </p>
                             </section>

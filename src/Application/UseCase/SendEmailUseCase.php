@@ -45,8 +45,6 @@ final class SendEmailUseCase implements SendEmailUseCaseInterface
             ->to('nafan9roma8@gmail.com')
             ->subject($emailData->getSubject());
 
-
-
         $mailer->send($mail);
 
     }

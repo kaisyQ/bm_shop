@@ -4,16 +4,17 @@ namespace App\Application\UseCase;
 
 use App\Application\Model\EmailDataModel;
 use App\Application\UseCase\Interface\SendEmailUseCaseInterface;
+use App\Application\Utils\CodeGenerator;
+use App\Domain\Entity\Code;
 use App\Domain\Entity\Customer;
-use App\Domain\Entity\User;
 use App\Infrastructure\Repository\CustomerRepository;
-use App\Infrastructure\Repository\UserRepository;
 use App\Presentation\Request\RegisterRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 final class RegisterUseCase
 {
+    use CodeGenerator;
     private SendEmailUseCaseInterface $sendEmailUseCase;
     private CustomerRepository $customerRepository;
     private EntityManagerInterface $em;
@@ -35,31 +36,38 @@ final class RegisterUseCase
      */
     public function execute(RegisterRequest $data): void
     {
-
         $user = $this->customerRepository->findOneBy(['email' => $data->email]);
 
         if ($user) {
             throw new \Exception('Error! User already exists.');
         }
 
+        $now = new \DateTimeImmutable();
 
-        $user = (new Customer())
+        $customer = (new Customer())
             ->setDeletedAt(new \DateTimeImmutable())
             ->setName($data->username)
             ->setPassword(hash_hmac('sha256', $data->password, 'bababa'))
             ->setEmail($data->email)
             ->setPending(true);
 
-        $this->em->persist($user);
+        $this->em->persist($customer);
+
+        $code = (new Code())
+            ->setCustomerId($customer->getId())
+            ->setCode($this->generateCode())
+            ->setExpiresAt($now->add(new \DateInterval('PT1H')));
+
+
+        $this->em->persist($code);
 
         $this->em->flush();
-
 
         $emailData = (new EmailDataModel())
             ->setEmail($data->email)
             ->setTemplateType('confirm_registration')
             ->setSubject('Confirm Registration')
-            ->setParams(['code' => '228']);
+            ->setParams(['code' => $code->getCode()]);
 
 
        $this->sendEmailUseCase->send($emailData);

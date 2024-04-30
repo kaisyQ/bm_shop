@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use App\Exception\ValidateException;
 use App\Infrastructure\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -41,10 +40,6 @@ class Comment
         $this->updatedAt = new \DateTimeImmutable();
     }
 
-    /**
-	 * @param  $id 
-	 * @return self
-    */
 	public function setId(?int $id): self {
 		$this->id = $id;
 		return $this;
@@ -72,7 +67,7 @@ class Comment
     }
 
     /**
-     * @throws ValidateException
+     * @throws \Exception
      */
     public function setStars(int $stars): static
     {
@@ -119,6 +114,9 @@ class Comment
         return $this;
     }
 
+    /**
+     * @throws \Exception
+     */
     private function validateStars (int $value): void
     {
         if ($value >= 1 && $value <= 5) return;
