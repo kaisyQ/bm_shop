@@ -21,15 +21,15 @@ final class GetProductsUseCase implements GetProductsUseCaseInterface
         private readonly CategoryRepository $categoryRepository,
         private readonly SerializerInterface $serializer
     ) {}
-    public function execute(GetProductsDto $data): ProductListResponse
+    public function execute(GetProductsDto $data)
     {
         $limit = $this->getLimit($data->limit);
         $page = $this->getPage($data->page);
 
         $offset = $this->getOffset($page, $limit);
 
-
         $category = $this->categoryRepository->findOneBy(['slug' => $data->category]);
+
         $products = $this->productRepository->paginateProducts(
             $limit,
             $offset,
@@ -41,9 +41,13 @@ final class GetProductsUseCase implements GetProductsUseCaseInterface
             $data->oldest,
             $data->newest
         );
+
+        return $products;
+
         $total = $this->productRepository->getTotalProductsCount($category, $data->priceFrom, $data->priceTo);
 
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
+
 
         return new ProductListResponse(
             array_map(
