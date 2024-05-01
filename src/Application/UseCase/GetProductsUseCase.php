@@ -63,7 +63,7 @@ final class GetProductsUseCase implements GetProductsUseCaseInterface
                     ->setDelivery($product->delivery)
                     ->setPrice($product->price)
                     ->setCount($product->count)
-                    ->setCategory($product->category)
+                    ->setCategory($product->category->name)
                     ->setDepth($product->depth)
                     ->setHeight($product->height)
                     ->setImages(array_map(fn ($attachment) => ($attachment->image), $product->attachments))

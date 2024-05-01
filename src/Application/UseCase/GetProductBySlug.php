@@ -45,7 +45,7 @@ final class GetProductBySlug implements GetProductBySlugInterface
             ->setDelivery($serializedProduct->delivery)
             ->setPrice($serializedProduct->price)
             ->setCount($serializedProduct->count)
-            ->setCategory($serializedProduct->category)
+            ->setCategory($serializedProduct->category->name)
             ->setDepth($serializedProduct->depth)
             ->setHeight($serializedProduct->height)
             ->setImages(array_map(fn ($attachment) => ($attachment->image), $serializedProduct->attachments))

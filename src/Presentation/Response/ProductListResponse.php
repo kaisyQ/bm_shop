@@ -13,7 +13,6 @@ final class ProductListResponse
 
     /**
      * @param ProductListItem[] $items
-     * @param int $total
      */
     public function __construct(array $items, int $total)
     {
@@ -22,7 +21,6 @@ final class ProductListResponse
     }
 
     /**
-     * 
      * @return ProductListItem[]
      */
     public function getItems(): array
@@ -32,8 +30,7 @@ final class ProductListResponse
 
     /**
      * 
-     * @param ProductListItem[] $items 
-     * @return self
+     * @param ProductListItem[] $items
      */
     public function setItems(array $items): self
     {
@@ -41,18 +38,11 @@ final class ProductListResponse
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getTotal(): int
     {
         return $this->total;
     }
 
-    /**
-     * @param int $total 
-     * @return self
-     */
     public function setTotal(int $total): self
     {
         $this->total = $total;
