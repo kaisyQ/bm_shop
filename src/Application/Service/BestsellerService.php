@@ -15,26 +15,24 @@ final class BestsellerService
         private SerializerInterface $serializer,
     ) {}
 
-    public function getBestsellers(): BestsellerListResponse
-    {
-        //$products = $this->productRepository->findBy(['bestseller' => true]);
-        //$serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
+public function getBestsellers(): BestsellerListResponse
+{
+        $products = $this->productRepository->findBy(['bestseller' => true]);
+        $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
 
-
-//        return new BestsellerListResponse (
-//            array_map(
-//                fn ($product) =>
-//                new BestsellerListItem(
-//                    $product['id'],
-//                    $product['name'],
-//                    $product['slug'],
-//                    $product['price'],
-//                    array_map(fn ($attachment) => $attachment['image'], $product['attachments']),
-//                    $product['discountPrice'],
-//                ),
-//               json_decode($serializedProducts)
-//            )
-//        );
-        return new BestsellerListResponse([]);
+        return new BestsellerListResponse (
+            array_map(
+                fn ($product) =>
+                new BestsellerListItem(
+                    $product->id,
+                    $product->name,
+                    $product->slug,
+                    $product->price,
+                    array_map(fn ($attachment) => $attachment->image, $product->attachments),
+                    $product->discountPrice,
+                ),
+               json_decode($serializedProducts)
+            )
+        );
     }
 }

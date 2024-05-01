@@ -83,7 +83,7 @@ class Product
 
     #[ORM\Column]
     #[Groups("product")]
-    private string $status;
+    private int $status;
 
     public function __construct()
     {

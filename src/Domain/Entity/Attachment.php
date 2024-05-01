@@ -32,10 +32,25 @@ class Attachment
     #[ORM\Column(type: "datetime")]
     private $updatedAt;
 
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: "attachments")]
+    #[Groups(["attachment"])]
+    private $product;
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -48,7 +63,7 @@ class Attachment
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -95,7 +110,7 @@ class Attachment
     {
         $this->imageFile = $imageFile;
         if ($imageFile) {
-            $this->updatedAt = new \DateTime();
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 }
