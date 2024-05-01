@@ -17,46 +17,40 @@ final class CategoryService
         private EntityManagerInterface $em
     ) {}
 
-    public function getCategories(): Maybe\Maybe
+    /**
+     * @throws \Exception
+     */
+    public function getCategories(): array
     {
-        return Maybe\nothing();
         try {
 
             $categories = $this->categoryRepository->findAll();
-
-            if (count($categories) === 0) {
-                return Maybe\nothing();
-            }
 
             $categories = json_decode($this->serializer->serialize($categories, 'json', ['groups' => ['category']]));
 
             $categories = array_map(fn ($category) => (AutoMapper::create())->map($category, CategoryModel::class), $categories);
 
-            return Maybe\just($categories);
+            return $categories;
 
         } catch (\Throwable $e) {
-            return Maybe\nothing();
+            // @TODO refactor
+           throw new \Exception($e->getMessage());
         }
     }
 
-    public function deleteById (int $id) 
+    public function deleteById (int $id): void
     {
         try {
 
             $category = $this->categoryRepository->find($id);
 
-            if ($category === null) {
-                return Maybe\nothing();
-            }
-
             $this->em->remove($category);
 
             $this->em->flush();
 
-            return Maybe\just([]);
-
         } catch (\Throwable $e) {
-            return Maybe\nothing();
+
+            // @TODO refactor
         }
     }
 }

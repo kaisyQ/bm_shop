@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace App\Presentation\Controller;
 
 use App\Application\Service\ProductService;
+use App\Application\UseCase\GetProductBySlug;
+use App\Application\UseCase\GetProductsUseCase;
+use App\Application\UseCase\Interface\GetProductBySlugInterface;
+use App\Application\UseCase\Interface\GetProductsUseCaseInterface;
+use App\Presentation\Dto\GetProductsDto;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,29 +18,17 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 #[Route(path: "/api/v1/products", name: "product_controller")]
 final class ProductController extends AbstractController
 {
+    private GetProductsUseCaseInterface $getProductsUseCase;
+    private GetProductBySlugInterface $getProductBySlugUseCase;
     public function __construct(
-        private readonly ProductService $productService,
-    )
-    {
+        GetProductBySlug $getProductBySlugUseCase,
+        GetProductsUseCase $getProductsUseCase
+    ) {
+        $this->getProductBySlugUseCase = $getProductBySlugUseCase;
+        $this->getProductsUseCase = $getProductsUseCase;
     }
-    #[Route(path: "/", name: "index", methods: ["GET"])]
-    // #[OA\Response(
-    //     response: 200,
-    //     description: 'Return all products',
-    //     content: new OA\JsonContent(
-    //         type: 'array',
-    //         items: new OA\Items(ref: new Model(type: ProductListResponse::class))
-    //     ),
-    // )]
-    // #[OA\QueryParameter(name: "category", schema: new Schema(type: "?string"))]
-    // #[OA\QueryParameter(name: "limit", schema: new Schema(type: "?int"))]
-    // #[OA\QueryParameter(name: "page", schema: new Schema(type: "?int"))]
-    // #[OA\QueryParameter(name: 'priceFrom', schema: new Schema(type: '?int'))]
-    // #[OA\QueryParameter(name: 'priceTo', schema: new Schema(type: '?int'))]
-    // #[OA\QueryParameter(name: 'alphabetAtoZ', schema: new Schema(type: '?bool'))]
-    // #[OA\QueryParameter(name: 'alphabetZtoA', schema: new Schema(type: '?bool'))]
-    // #[OA\QueryParameter(name: 'date', schema: new Schema(type: '?bool'))]
 
+    #[Route(path: "/", name: "index", methods: ["GET"])]
     public function index(
         #[MapQueryParameter] ?string $category,
         #[MapQueryParameter] ?int $limit,
@@ -49,9 +42,8 @@ final class ProductController extends AbstractController
 
     ): JsonResponse
     {
-
-        return $this->json(
-            $this->productService->getProducts(
+        $result = $this->getProductsUseCase->execute(
+            new GetProductsDto(
                 $category,
                 $page,
                 $limit,
@@ -63,18 +55,15 @@ final class ProductController extends AbstractController
                 $newest
             )
         );
+
+        return $this->json($result);
     }
 
-    #[Route(path: '/{slug}', name: 'show', methods: ['GET'])]
-    // #[OA\Response(
-    //     response: 200,
-    //     description: 'Return product',
-    //     content: new OA\JsonContent(
-    //         ref: new Model(type: ProductListItem::class)
-    //     )
-    // )]
+    #[Route(path: '/{slug}', name: 'how', methods: ['GET'])]
     public function show(string $slug): JsonResponse
-    {   
-        return $this->json($this->productService->getProductBySlug($slug));
+    {
+        $result = $this->getProductBySlugUseCase->execute($slug);
+
+        return $this->json($result);
     }
 }

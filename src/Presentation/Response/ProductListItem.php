@@ -26,7 +26,7 @@ final class ProductListItem
     /**
      * @see ProductStatusEnums
      */
-    private string $status;
+    private int $status;
     public function getId(): int
     {
         return $this->id;
@@ -198,12 +198,12 @@ final class ProductListItem
         return $this;
     }
 
-    public function getStatus(): string 
+    public function getStatus(): int
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self 
+    public function setStatus(int $status): self
     {
         $this->status = $status;
 
