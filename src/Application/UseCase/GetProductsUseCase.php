@@ -42,8 +42,6 @@ final class GetProductsUseCase implements GetProductsUseCaseInterface
             $data->newest
         );
 
-        return $products;
-
         $total = $this->productRepository->getTotalProductsCount($category, $data->priceFrom, $data->priceTo);
 
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['product']]);
@@ -63,7 +61,7 @@ final class GetProductsUseCase implements GetProductsUseCaseInterface
                     ->setDelivery($product->delivery)
                     ->setPrice($product->price)
                     ->setCount($product->count)
-                    ->setCategory($product->category->name)
+                    ->setCategory($product->category !== null ? $product->category->name : null)
                     ->setDepth($product->depth)
                     ->setHeight($product->height)
                     ->setImages(array_map(fn ($attachment) => ($attachment->image), $product->attachments))
