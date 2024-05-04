@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace App\Application\Service;
+namespace App\Application\UseCase;
 
+use App\Infrastructure\Repository\ProductRepository;
 use App\Presentation\Response\SearchListItem;
 use App\Presentation\Response\SearchListResponse;
-use App\Infrastructure\Repository\ProductRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
-final class SearchService
+final readonly class SearchUseCase
 {
     public function __construct(
-        private readonly ProductRepository $productRepository,
-        private readonly SerializerInterface $serializer,
+        private ProductRepository   $productRepository,
+        private SerializerInterface $serializer,
     ) {
     }
-    public function search(string $query): SearchListResponse
+    public function execute(string $query): SearchListResponse
     {
         $products = $this->productRepository->findByContainingName($query);
         $serializedProducts = $this->serializer->serialize($products, 'json', ['groups' => ['search']]);
